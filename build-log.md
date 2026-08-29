@@ -62,3 +62,29 @@ Read this file at the start of every session before touching code.
 - Files touched: src/data/site.ts, build-log.md (appended)
 - Known issues: none new
 - Next module: Module 5 — Projects: MED case study
+
+## Module 5 — Projects: MED case study — 2026-08-29
+- Built: src/components/MedCaseStudy.astro — the page centerpiece (PRD §6.3), section id="work" per nav semantics. Rail label "Work" (p, not heading — the project name is the section's real h2); honest status line "In progress — building in public" in mono; h2 project name in display face; framing hook "VIX measures fear. / PAL measures fragility." with the PAL sentence in accent (the one sanctioned PAL metric callout); description prose; **custom data-driven inline SVG architecture diagram** (LangGraph → Kafka → Databricks Lakehouse → Mosaic AI/RAG: 4 boxes + arrowhead markers, rendered from site.med.architecture with computed geometry, Tailwind token classes stroke-line/fill-ink/fill-muted, role="img" + aria-label, IBM Plex Mono text) — hidden below md; **mobile gets the same data as a stacked numbered list** with ↓ connectors (md:hidden); mono stack row "Stack — LangGraph · Kafka · Databricks · Delta Lake · Snowflake · FastAPI · Streamlit · Prometheus" (no pills); links row: "GitHub repo" accent link + Medium slot rendering "Medium deep-dive — coming soon" placeholder while articleUrl is null (auto-becomes a real link when set in site.ts). index.astro renders Hero + About + MedCaseStudy. Verified: build + astro check clean (9 files, 0 errors); 10/10 HTML markers present.
+- Key decisions:
+  - Diagram is data-driven from site.med.architecture (single-source-of-truth preserved); geometry computed in frontmatter
+  - Mobile strategy: no horizontal scroll needed — SVG at md+, stacked list below md (readability over diagram fidelity at 375px)
+  - Framing sentence split computed in frontmatter from the single framing string (no hardcoded copy in component)
+  - SVG uses Tailwind theme utility classes (stroke-*/fill-*) so diagram colors stay tokenized
+  - "Work" rail label demoted to <p> so the project name stays the section h2 (heading hierarchy)
+- Files touched: src/components/MedCaseStudy.astro (new), src/pages/index.astro, build-log.md (appended)
+- Known issues: MED repo link currently resolves to github.com/arvindram27 profile (TODO in site.ts until real repo URL provided); Medium slot intentional placeholder; dev server had died and was restarted this session
+- Next module: Module 6 — Secondary project card + Skills
+
+## Module 5a — Architecture diagram sizing tweak — 2026-08-29
+- Built: user-requested size reduction of the MED architecture SVG. Geometry compacted (viewBox 920×120 → 764×88: boxes 200→170w/88→64h, label/detail fonts 16/12 → 13/11); removed min-w-[680px] + overflow-x-auto wrapper — svg is now `w-full max-w-[720px]`, so it always scales-to-fit its container with zero horizontal scroll at every md+ width and is capped at 720px on large desktops (~24% smaller visual footprint, ~83px tall vs ~127px). Mobile (<md) unchanged: stacked numbered list fits 375px with no scroll. Verified: build + astro check clean; new viewBox + classes present in built HTML; dev server up.
+- Key decisions: scale-to-fit beats min-width+scroll for this diagram (worst-case md render still yields ~12px effective label text — readable)
+- Files touched: src/components/MedCaseStudy.astro, build-log.md (appended)
+- Known issues: none new
+- Next module: Module 6 — Secondary project card + Skills
+
+## Cloudflare agent setup — 2026-08-29
+- Built: environment setup per Cloudflare's official agent instructions (developers.cloudflare.com/agent-setup/prompt.md), OpenCode branch. 13 Cloudflare skills installed globally to ~/.agents/skills/ (agents-sdk, cloudflare, cloudflare-email-service, cloudflare-one, cloudflare-one-migrations, durable-objects, sandbox-*, turnstile-spin, web-perf, workers-best-practices, wrangler) — opencode auto-loads them. 5 remote MCP servers registered in ~/.config/opencode/opencode.jsonc: cloudflare, cloudflare-docs, cloudflare-bindings, cloudflare-builds, cloudflare-observability (shapes validated against https://opencode.ai/config.json — oauth:{} is valid McpOAuthConfig). OAuth for the main `cloudflare` server completed successfully via `opencode mcp auth cloudflare`; docs server needs no auth; bindings/builds/observability trigger OAuth on first use.
+- Key decisions: agent-side setup only — no project files touched; deploy wiring (Cloudflare Pages ← GitHub repo arvindram27/arvindramachandran-tech) happens in Module 9 using these MCPs/wrangler skill
+- Files touched: ~/.agents/skills/* (global), ~/.config/opencode/opencode.jsonc (global), build-log.md (appended)
+- Known issues: requires opencode restart for MCP servers to load; turnstile-spin skill flagged High Risk by Snyk (unused by this project — ignore unless Turnstile is ever needed)
+- Next module: Module 6 — Secondary project card + Skills (pointer updated after Module 5 landed; entry written before Module 5)

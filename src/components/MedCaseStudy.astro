@@ -1,0 +1,133 @@
+---
+import { site } from "../data/site";
+
+const stages = site.med.architecture;
+const boxW = 170;
+const gap = 28;
+const boxY = 12;
+const boxH = 64;
+const boxXs = stages.map((_, i) => i * (boxW + gap));
+const svgW = stages.length * boxW + (stages.length - 1) * gap;
+const svgH = 88;
+const centerY = boxY + boxH / 2;
+
+const [fearLine, fragilityLine] = site.med.framing
+  .split(". ")
+  .map((sentence, i, all) => (i < all.length - 1 ? `${sentence}.` : sentence));
+
+const stageAria = stages.map((s) => s.label).join(" → ");
+---
+
+<section id="work" aria-labelledby="work-heading" class="border-t border-line">
+  <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
+    <div class="grid gap-8 md:grid-cols-[180px_1fr] md:gap-16">
+      <div>
+        <p class="font-mono text-sm font-medium text-muted">Work</p>
+      </div>
+      <div>
+        <p class="font-mono text-sm text-muted">{site.med.status}</p>
+        <h2 id="work-heading" class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+          {site.med.name}
+        </h2>
+        <p class="mt-8 font-display text-2xl font-medium leading-snug sm:text-3xl">
+          <span class="text-ink">{fearLine}</span>
+          <span class="text-accent"> {fragilityLine}</span>
+        </p>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          {site.med.description}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 hidden md:block">
+      <svg
+        class="w-full max-w-[720px]"
+        viewBox={`0 0 ${svgW} ${svgH}`}
+        role="img"
+        aria-label={`MED architecture: ${stageAria}`}
+        font-family="'IBM Plex Mono', monospace"
+      >
+        <defs>
+          <marker id="med-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="fill-muted"></path>
+          </marker>
+        </defs>
+        {stages.map((stage, i) => (
+          <g>
+            <rect
+              x={boxXs[i]}
+              y={boxY}
+              width={boxW}
+              height={boxH}
+              rx="2"
+              class="fill-paper stroke-line"
+              stroke-width="1.5"></rect>
+            <text
+              x={boxXs[i] + boxW / 2}
+              y={centerY - 2}
+              text-anchor="middle"
+              font-size="13"
+              font-weight="500"
+              class="fill-ink">{stage.label}</text>
+            <text
+              x={boxXs[i] + boxW / 2}
+              y={centerY + 16}
+              text-anchor="middle"
+              font-size="11"
+              class="fill-muted">{stage.detail}</text>
+            {i < stages.length - 1 && (
+              <line
+                x1={boxXs[i] + boxW + 3}
+                y1={centerY}
+                x2={boxXs[i + 1] - 5}
+                y2={centerY}
+                class="stroke-muted"
+                stroke-width="1.5"
+                marker-end="url(#med-arrow)"></line>
+            )}
+          </g>
+        ))}
+      </svg>
+    </div>
+
+    <ol class="mt-10 flex flex-col gap-2 md:hidden">
+      {stages.map((stage, i) => (
+        <>
+          <li class="flex items-baseline gap-3 border border-line px-4 py-3">
+            <span class="font-mono text-xs text-muted">{(i + 1).toString().padStart(2, "0")}</span>
+            <span class="text-sm font-medium text-ink">{stage.label}</span>
+            <span class="font-mono text-xs text-muted">{stage.detail}</span>
+          </li>
+          {i < stages.length - 1 && (
+            <li aria-hidden="true" class="text-center font-mono text-xs text-muted">↓</li>
+          )}
+        </>
+      ))}
+    </ol>
+
+    <p class="mt-12 font-mono text-sm text-muted">
+      <span class="font-medium text-ink">Stack</span> — {site.med.stack.join(" · ")}
+    </p>
+
+    <div class="mt-6 flex flex-wrap items-center gap-6">
+      <a
+        href={site.med.repoUrl}
+        class="text-sm font-medium text-accent underline-offset-4 hover:text-accent-strong hover:underline"
+      >
+        GitHub repo
+      </a>
+      {
+        site.med.articleUrl ? (
+          <a
+            href={site.med.articleUrl}
+            class="text-sm font-medium text-accent underline-offset-4 hover:text-accent-strong hover:underline"
+          >
+            Medium deep-dive
+          </a>
+        ) : (
+          <p class="font-mono text-sm text-muted">Medium deep-dive — coming soon</p>
+        )
+      }
+    </div>
+  </div>
+</section>
