@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — arvindramachandran.tech
+  Near-monochrome base + ONE accent (amber/terminal orange).
+  Accent is reserved for: links, PAL callout, CTAs. Never decorative.
+  This is the anti-"AI-slop" foundation (PRD §3): no gradients, no glass, no default Tailwind look.
+*/
+@theme {
+  /* Typography */
+  --font-display: "Space Grotesk Variable", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", "Courier New", monospace;
+
+  /* Palette */
+  --color-paper: #fafaf7;
+  --color-ink: #141412;
+  --color-muted: #6b6b66;
+  --color-line: #e6e4dc;
+  --color-accent: #b45309;
+  --color-accent-strong: #92400e;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-accent text-paper;
+  }
+}
