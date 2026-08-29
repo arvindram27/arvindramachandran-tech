@@ -34,4 +34,9 @@
   ::selection {
     @apply bg-accent text-paper;
   }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }

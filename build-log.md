@@ -35,3 +35,14 @@ Read this file at the start of every session before touching code.
 - Files touched: src/layouts/Base.astro (new), src/components/Header.astro (new), src/pages/index.astro (rewritten), build-log.md (appended)
 - Known issues: /resume.pdf still 404 until Module 8; og:image TODO comment in Base.astro until Module 8; Module 2 changes not yet committed (awaiting user go-ahead); 375/768/1440 visual check is a quick manual pass on the running dev server
 - Next module: Module 3 — Hero
+
+## Module 3 — Hero — 2026-08-29
+- Built: src/components/Hero.astro (mono location kicker; Space Grotesk h1 name at 48/60/72px; positioning statement in display face; mono credibility stack row "Python · SQL · Databricks · AWS · LangGraph" — no pills; exactly 2 CTAs: solid amber "View MED" → #work + outline "Resume" → /resume.pdf; asymmetric md:grid with large PAL sparkline motif + "PAL — Price Anomaly Locator" mono caption on the right, hidden on mobile); index.astro now renders Base + Hero only; global.css gained :focus-visible accent outline (site-wide keyboard a11y). Verified: build + astro check clean (7 files, 0 errors) + dev-server HTML markers all present (h1, positioning, stack row, both CTAs, sparkline caption, location kicker).
+- Key decisions:
+  - Kicker uses factual location line from site.ts in mono muted — accent reserved for motif dot + CTAs (PRD §3 accent discipline)
+  - PAL sparkline enlarged as hero-side personal mark (ties hero → MED narrative); aria-hidden, decorative only
+  - Positioning statement set in display face at statement scale — typography-led per PRD §3, no imagery
+  - Zero client JS maintained; no entrance animations
+- Files touched: src/components/Hero.astro (new), src/pages/index.astro (rewritten), src/styles/global.css (focus-visible rule), build-log.md (appended)
+- Known issues: /resume.pdf still 404 until Module 8; 375px hero relies on hidden sparkline + wrapping CTAs (visual pass recommended on dev server)
+- Next module: Module 4 — About
