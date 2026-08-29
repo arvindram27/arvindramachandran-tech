@@ -1,32 +1,17 @@
 ---
-// Temporary scaffold-check page. Replaced by the Base layout + real sections from Module 2 onward.
-import "@fontsource-variable/space-grotesk";
-import "@fontsource/ibm-plex-sans/400.css";
-import "@fontsource/ibm-plex-sans/500.css";
-import "@fontsource/ibm-plex-sans/600.css";
-import "@fontsource/ibm-plex-mono/400.css";
-import "@fontsource/ibm-plex-mono/500.css";
-import "../styles/global.css";
+// Placeholder body — real Hero lands in Module 3; this only proves the Base layout wiring.
+import Base from "../layouts/Base.astro";
 import { site } from "../data/site";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{site.name} — {site.domain}</title>
-    <meta name="description" content={site.hero.positioning} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body>
-    <main class="mx-auto max-w-5xl px-6 py-24">
-      <p class="font-mono text-sm text-accent">{site.domain}</p>
-      <h1 class="mt-4 font-display text-5xl font-semibold tracking-tight">{site.name}</h1>
-      <p class="mt-4 max-w-prose text-lg text-muted">{site.hero.positioning}</p>
-      <p class="mt-8 font-mono text-sm">{site.hero.stack.join(" · ")}</p>
-      <p class="mt-16 font-mono text-xs text-muted">
-        Scaffold v0.1 — sections land module by module (see build-log.md).
-      </p>
-    </main>
-  </body>
-</html>
+<Base>
+  <section class="mx-auto max-w-5xl px-6 py-24">
+    <p class="font-mono text-sm text-accent">{site.domain}</p>
+    <h1 class="mt-4 font-display text-5xl font-semibold tracking-tight">{site.name}</h1>
+    <p class="mt-4 max-w-prose text-lg text-muted">{site.hero.positioning}</p>
+    <p class="mt-8 font-mono text-sm">{site.hero.stack.join(" · ")}</p>
+    <p class="mt-16 font-mono text-xs text-muted">
+      Scaffold v0.1 — sections land module by module (see build-log.md).
+    </p>
+  </section>
+</Base>
