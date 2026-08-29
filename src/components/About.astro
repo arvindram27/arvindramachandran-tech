@@ -1,0 +1,14 @@
+---
+import { site } from "../data/site";
+---
+
+<section aria-labelledby="about-heading" id="about" class="border-t border-line">
+  <div class="mx-auto grid max-w-5xl gap-8 px-4 py-16 sm:px-6 sm:py-24 md:grid-cols-[180px_1fr] md:gap-16">
+    <div>
+      <h2 id="about-heading" class="font-mono text-sm font-medium text-muted">About</h2>
+    </div>
+    <div class="max-w-2xl text-lg leading-relaxed text-ink">
+      {site.about.map((paragraph, i) => <p class={i > 0 ? "mt-6" : ""}>{paragraph}</p>)}
+    </div>
+  </div>
+</section>

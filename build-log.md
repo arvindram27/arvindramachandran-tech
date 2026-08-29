@@ -46,3 +46,12 @@ Read this file at the start of every session before touching code.
 - Files touched: src/components/Hero.astro (new), src/pages/index.astro (rewritten), src/styles/global.css (focus-visible rule), build-log.md (appended)
 - Known issues: /resume.pdf still 404 until Module 8; 375px hero relies on hidden sparkline + wrapping CTAs (visual pass recommended on dev server)
 - Next module: Module 4 — About
+
+## Module 4 — About — 2026-08-29
+- Built: src/components/About.astro (editorial marker-column layout: mono h2 "About" label in a 180px left rail, 18px relaxed prose in a max-w-2xl column, hairline border-t section divider, id="about"); src/data/site.ts `about` restructured from a single string to `string[]` (two paragraphs: background/stack, then current MED focus + targeting — facts unchanged, split is presentational only); index.astro renders Hero + About. Verified: build + astro check clean (8 files, 0 errors) + dev-server markers all present (heading, both paragraphs, section id).
+- Key decisions:
+  - Section pattern established: hairline top border + mono small-caps-style label rail + content column — this becomes the template for Work/Projects/Experience/Contact sections (consistency without decoration)
+  - Gap/non-CS background stated plainly inside the existing PRD prose — no extra apologia, per PRD §6.2
+- Files touched: src/components/About.astro (new), src/data/site.ts (about: string → string[]), src/pages/index.astro, build-log.md (appended)
+- Known issues: none new (/resume.pdf 404 unchanged)
+- Next module: Module 5 — Projects: MED case study

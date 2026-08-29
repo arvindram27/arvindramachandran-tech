@@ -38,7 +38,7 @@ export type SiteContent = {
     stack: string[];
     ctas: { primary: NavItem; secondary: NavItem };
   };
-  about: string;
+  about: string[];
   med: {
     name: string;
     shortName: string;
@@ -97,8 +97,10 @@ export const site: SiteContent = {
     },
   },
 
-  about:
-    "Self-taught Data Engineer transitioning from a Mechanical Engineering background (B.Tech, Saveetha Engineering College, 2017) through focused self-study and hands-on project work. Working primarily in Python, SQL, Databricks, and AWS, with growing depth in applied GenAI and agentic systems. Currently building MED, a multi-agent financial intelligence system, as a proof-of-skill anchor. Based in Chennai, targeting Data/Analytics/Applied AI Engineering roles — Singapore FinTech & AI sector primarily, GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step.",
+  about: [
+    "Self-taught Data Engineer transitioning from a Mechanical Engineering background (B.Tech, Saveetha Engineering College, 2017) through focused self-study and hands-on project work. Working primarily in Python, SQL, Databricks, and AWS, with growing depth in applied GenAI and agentic systems.",
+    "Currently building MED, a multi-agent financial intelligence system, as a proof-of-skill anchor. Based in Chennai, targeting Data/Analytics/Applied AI Engineering roles — Singapore FinTech & AI sector primarily, GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step.",
+  ],
 
   med: {
     name: "MED — Market Efficiency Detector",
