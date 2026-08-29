@@ -88,3 +88,13 @@ Read this file at the start of every session before touching code.
 - Files touched: ~/.agents/skills/* (global), ~/.config/opencode/opencode.jsonc (global), build-log.md (appended)
 - Known issues: requires opencode restart for MCP servers to load; turnstile-spin skill flagged High Risk by Snyk (unused by this project — ignore unless Turnstile is ever needed)
 - Next module: Module 6 — Secondary project card + Skills (pointer updated after Module 5 landed; entry written before Module 5)
+
+## Module 6 — Secondary project card + Skills — 2026-08-29
+- Built: src/components/SecondaryProjects.astro (section id="projects", rail h2 "Projects" — heading hierarchy restored to the About pattern; one bordered hairline card per entry in site.secondaryProjects — currently the Multi-Agent Market Intelligence System: h3 display name, muted description, accent "GitHub repo" link to github.com/arvindram27/multi-agent-market-intelligence; array-driven so future projects append without layout changes); src/components/Skills.astro (section id="skills", rail h2 "Skills", semantic <dl> with divide-y hairlines: dt = mono category label, dd = items joined " · " — plain text blocks mirroring the resume, zero progress bars/percentages per PRD §6.4; all 6 groups from site.skills). index.astro renders Hero → About → MedCaseStudy → SecondaryProjects → Skills. Verified: build + astro check clean (11 files, 0 errors); 9/9 HTML markers present; dev server restarted (died again between sessions).
+- Key decisions:
+  - Card = single hairline border, no shadow/rounded-bloat (PRD §3: not soft-UI); visual weight deliberately far below MED per PRD §6.3 "shorter treatment"
+  - Skills as <dl> rows: category in the mono left column, items as body prose — resume-mirroring without decoration
+  - No stack tags on the secondary project (PRD lists none — nothing invented)
+- Files touched: src/components/SecondaryProjects.astro (new), src/components/Skills.astro (new), src/pages/index.astro, build-log.md (appended)
+- Known issues: /resume.pdf 404 unchanged; MED repo URL TODO unchanged
+- Next module: Module 7 — Experience + Education/Certifications
