@@ -98,3 +98,14 @@ Read this file at the start of every session before touching code.
 - Files touched: src/components/SecondaryProjects.astro (new), src/components/Skills.astro (new), src/pages/index.astro, build-log.md (appended)
 - Known issues: /resume.pdf 404 unchanged; MED repo URL TODO unchanged
 - Next module: Module 7 — Experience + Education/Certifications
+
+## Favicon set — cross-platform (desktop/iOS/Android) — 2026-08-29
+- Built: full multi-size icon set generated from public/favicon.svg (the header PAL sparkline mark with baked-in colors) via new committed script scripts/build-favicons.mjs (`npm run favicons`, sharp + png-to-ico devDeps, 0 npm vulnerabilities). Generated: favicon.ico (16+32+48 embedded), favicon-16x16/32x32/48x48.png, apple-touch-icon.png (180, full-bleed — iOS rounds corners itself), android-chrome-192/512.png, android-chrome-maskable-192/512.png (artwork inset to 70% on paper background for adaptive-icon safe zones), site.webmanifest (name/short_name/start_url/display/theme_color #FAFAF7/background_color). Base.astro head now has the full link set: ico sizes="any" + SVG + 32/32 + 16/16 PNGs + apple-touch-icon + manifest. Verified: pixel dimensions of all 8 PNGs exact via sharp metadata; build + astro check clean (12 files, 0 errors); dev server serves all 10 assets with 200 + correct content types (manifest = application/manifest+json).
+- Key decisions:
+  - Rasterize from public/favicon.svg (not the header inline SVG) — same motif, colors baked, paper bg keeps it visible on dark tab bars
+  - Maskable variants inset to 70% (Android adaptive masking crops ~20% edge)
+  - Skipped browserconfig.xml/mstile (legacy Edge tiles — 2026 Edge reads the manifest)
+  - short_name "Arvind R"; script top-comment mandates syncing manifest name with site.ts
+- Files touched: scripts/build-favicons.mjs (new), public/{favicon.ico, favicon-16x16.png, favicon-32x32.png, favicon-48x48.png, apple-touch-icon.png, android-chrome-192x192.png, android-chrome-512x512.png, android-chrome-maskable-192x192.png, android-chrome-maskable-512x512.png, site.webmanifest} (generated), package.json (favicons script + devDeps), src/layouts/Base.astro, build-log.md (appended)
+- Known issues: favicon.ico renders from PNG intermediates (fine at 16-48px); browser-tab/iOS/Android home-screen visual confirmation needs the user after deploy (favicons cache aggressively — hard-refresh); not yet committed
+- Next module: Module 7 — Experience + Education/Certifications
