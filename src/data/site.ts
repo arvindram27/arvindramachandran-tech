@@ -69,7 +69,7 @@ export const site: SiteContent = {
   name: "Arvind Ramachandran",
   domain: "arvindramachandran.tech",
   email: "arvind@arvindramachandran.tech",
-  location: "Chennai, Tamil Nadu — open to Singapore & GCC roles",
+  location: "Chennai, Tamil Nadu — open to Startup & GCC roles",
 
   // Phone number deliberately excluded from the public site (decision logged in build-log Session 0; lives on the resume PDF only).
   links: {
@@ -99,7 +99,7 @@ export const site: SiteContent = {
 
   about: [
     "Self-taught Data Engineer transitioning from a Mechanical Engineering background (B.Tech, Saveetha Engineering College, 2017) through focused self-study and hands-on project work. Working primarily in Python, SQL, Databricks, and AWS, with growing depth in applied GenAI and agentic systems.",
-    "Currently building MED, a multi-agent financial intelligence system, as a proof-of-skill anchor. Based in Chennai, targeting Data/Analytics/Applied AI Engineering roles — Singapore FinTech & AI sector primarily, GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step.",
+    "Currently building MED, a multi-agent financial intelligence system, as a proof-of-skill anchor. Based in Chennai, targeting Data/Analytics/Applied AI Engineering roles — FinTech & AI sector primarily, Startup & GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step.",
   ],
 
   med: {

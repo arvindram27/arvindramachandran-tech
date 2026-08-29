@@ -55,3 +55,10 @@ Read this file at the start of every session before touching code.
 - Files touched: src/components/About.astro (new), src/data/site.ts (about: string → string[]), src/pages/index.astro, build-log.md (appended)
 - Known issues: none new (/resume.pdf 404 unchanged)
 - Next module: Module 5 — Projects: MED case study
+
+## Content amendment — location & targeting copy — 2026-08-29
+- Built: user-directed copy change, no layout/code changes. Hero kicker (site.location): "open to Singapore & GCC roles" → "open to Startup & GCC roles". About ¶2: "— Singapore FinTech & AI sector primarily, GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step." → "— FinTech & AI sector primarily, Startup & GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step." Verified: build + astro check clean; "Singapore" absent from src/ and served HTML.
+- Key decisions: positioning re-aim per user (Singapore de-emphasized) — PRD §6.1/§6.2 wording now superseded; treat PRD as amended on this point.
+- Files touched: src/data/site.ts, build-log.md (appended)
+- Known issues: none new
+- Next module: Module 5 — Projects: MED case study
