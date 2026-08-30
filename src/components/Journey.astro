@@ -1,0 +1,179 @@
+---
+import { site } from "../data/site";
+
+const { intro, nodes, artwork, cta } = site.journey;
+
+const titleClass = {
+  normal: "text-lg font-semibold",
+  emphasis: "text-2xl font-semibold",
+} as const;
+
+const bodyClass = "mt-2 text-base leading-relaxed text-muted";
+---
+
+<section id="journey" aria-labelledby="journey-heading" class="border-t border-line">
+  <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
+    <div class="grid gap-8 md:grid-cols-[180px_1fr] md:gap-16">
+      <div>
+        <h2 id="journey-heading" class="font-mono text-sm font-medium text-muted">Journey</h2>
+      </div>
+      <div>
+        <div class="max-w-2xl space-y-4 text-lg leading-relaxed text-muted">
+          {intro.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+
+        <ol class="relative mt-14 space-y-14" data-journey>
+          <div class="absolute top-3 bottom-3 left-[5px] w-[2px] bg-line" aria-hidden="true">
+            <div class="journey-fill h-0 w-full bg-ink"></div>
+          </div>
+          {
+            nodes.map((node, i) => (
+              <li
+                class="journey-node relative pl-8 sm:pl-10"
+                style={`transition-delay:${Math.min(i * 60, 240)}ms`}
+              >
+                <span
+                  aria-hidden="true"
+                  class={`absolute rounded-full border-2 border-ink bg-paper ${
+                    node.weight === "emphasis"
+                      ? "top-1 h-4 w-4 -left-[2px]"
+                      : "top-1.5 h-3 w-3 left-0"
+                  } ${i === nodes.length - 1 ? "border-accent bg-accent" : ""}`}
+                />
+                <p class="font-mono text-xs text-muted">{node.era}</p>
+                <h3 class={`mt-1 font-display tracking-tight text-ink ${titleClass[node.weight]}`}>
+                  {node.title}
+                </h3>
+                <p class={`max-w-2xl ${bodyClass}`} set:html={node.body} />
+
+                {i === 3 && artwork.length > 0 && (
+                  <div class="mt-6 grid max-w-xl grid-cols-3 gap-3">
+                    {artwork.map((piece) => (
+                      <figure class="border border-line">
+                        <img
+                          src={piece.src}
+                          alt={piece.alt}
+                          loading="lazy"
+                          decoding="async"
+                          class="aspect-square w-full object-cover"
+                        />
+                      </figure>
+                    ))}
+                  </div>
+                )}
+
+                {i === nodes.length - 1 && (
+                  <div class="mt-6 max-w-xl border border-line bg-paper p-6">
+                    <svg class="w-40" viewBox="0 0 280 96" fill="none" aria-hidden="true">
+                      <polyline
+                        points="0,78 28,70 52,74 80,58 104,66 132,50 156,58 184,40 208,46 232,28 256,36 280,16"
+                        stroke="#141412"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <circle cx="232" cy="28" r="6" fill="#B45309" />
+                    </svg>
+                    <p class="mt-3 font-mono text-xs text-muted">
+                      MED preview — placeholder until the first PAL charts ship.
+                      TODO(AR): replace with a real PAL chart.
+                    </p>
+                  </div>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+
+        <div class="journey-node mt-14">
+          <a
+            href={cta.href}
+            class="inline-block rounded-sm bg-accent px-5 py-3 text-sm font-medium text-paper hover:bg-accent-strong"
+          >
+            {cta.label}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .journey-node {
+    transition:
+      opacity 300ms ease-out,
+      transform 300ms ease-out;
+  }
+
+  .journey-fill {
+    transition: height 300ms ease-out;
+  }
+
+  .journey-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .journey-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .journey-node,
+    .journey-fill {
+      transition: none;
+    }
+
+    .journey-hidden {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const timeline = document.querySelector("[data-journey]");
+  const nodes = timeline ? timeline.querySelectorAll(".journey-node") : [];
+  const fill = timeline ? timeline.querySelector<HTMLElement>(".journey-fill") : null;
+
+  if (
+    timeline &&
+    fill &&
+    nodes.length > 0 &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    for (const node of nodes) node.classList.add("journey-hidden");
+
+    const reveal = new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("journey-visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.15 },
+    );
+    for (const node of nodes) reveal.observe(node);
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const rect = timeline.getBoundingClientRect();
+      const anchor = window.innerHeight * 0.6;
+      const progress = Math.min(1, Math.max(0, (anchor - rect.top) / rect.height));
+      fill.style.height = `${Math.round(progress * 100)}%`;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+</script>

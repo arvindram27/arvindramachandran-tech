@@ -9,12 +9,16 @@ export type SkillGroup = {
   items: string[];
 };
 
-export type ExperienceEntry = {
-  role: string;
-  org: string;
-  location: string;
-  period: string;
-  points: string[];
+export type JourneyNode = {
+  era: string;
+  title: string;
+  body: string;
+  weight: "normal" | "emphasis";
+};
+
+export type Artwork = {
+  src: string;
+  alt: string;
 };
 
 export type Certification = {
@@ -56,7 +60,12 @@ export type SiteContent = {
     repoUrl: string;
   }[];
   skills: SkillGroup[];
-  experience: ExperienceEntry[];
+  journey: {
+    intro: string[];
+    nodes: JourneyNode[];
+    artwork: Artwork[];
+    cta: { label: string; href: string };
+  };
   education: {
     degree: string;
     school: string;
@@ -83,7 +92,7 @@ export const site: SiteContent = {
   nav: [
     { label: "Work", href: "#work" },
     { label: "Projects", href: "#projects" },
-    { label: "Experience", href: "#experience" },
+    { label: "Journey", href: "#journey" },
     { label: "Contact", href: "#contact" },
   ],
 
@@ -165,26 +174,64 @@ export const site: SiteContent = {
     },
   ],
 
-  experience: [
-    {
-      role: "Independent Data/Software Developer",
-      org: "Self-Employed",
-      location: "Chennai",
-      period: "June 2017 – Present",
-      points: [
-        "Self-directed transition into data engineering through applied project work",
-        "Currently building MED on Databricks + Kafka + LangGraph",
-        "CI/CD with automated testing across projects",
-      ],
-    },
-    {
-      role: "Marketing Operations Intern",
-      org: "CK's Foods Pvt Ltd",
-      location: "Chennai",
-      period: "Jan – Mar 2024",
-      points: ["SQL for data segmentation and analysis", "Built automated reporting systems"],
-    },
-  ],
+  journey: {
+    intro: [
+      "From a mechanical engineering degree and years of competitive-exam preparation to building a multi-agent market intelligence system — a nine-year arc of self-directed pivots. The short version: capital-markets curiosity, one pivotal book, generative-art experiments, and a deepening focus on AI agents, all converging in MED.",
+    ],
+    nodes: [
+      {
+        era: "2017",
+        title: "Graduation",
+        body: "Mechanical engineering degree in hand. Next: Civil Services, RBI Grade B, SEBI Grade A.",
+        weight: "normal",
+      },
+      {
+        era: "2017–2025",
+        title: "An interest takes root",
+        body: "Eight years preparing for those exams meant living inside the Indian economy — budgets, monetary policy, capital markets. The exams didn't work out. The interest never left.",
+        weight: "normal",
+      },
+      {
+        era: "The pivot",
+        title: "The Dip",
+        body: "A Kindle from my sister brought reading back. Seth Godin's <em>The Dip</em> asked one question I couldn't shake: push through, or is this quietly a dead end? I had my answer.",
+        weight: "normal",
+      },
+      {
+        era: "Experiments",
+        title: "Generative art",
+        body: "The pivot started visually. Months inside Midjourney — learning to think in prompts, how these models compose, iterate, surprise.",
+        weight: "normal",
+      },
+      {
+        era: "Under the hood",
+        title: "From using AI to understanding it",
+        body: "Curiosity shifted from what generative tools make to how they work. LLMs, agents, orchestration. Data and AI engineering entered the picture.",
+        weight: "emphasis",
+      },
+      {
+        era: "Now",
+        title: "MED — Market Efficiency Detector",
+        body: "Two threads converge: capital markets from the exam years, agents from the curiosity years. MED detects market fragility — built in public, one module at a time.",
+        weight: "normal",
+      },
+    ],
+    artwork: [
+      {
+        src: "/journey/journey-art-1.jpg",
+        alt: "Midjourney artwork — a monumental white figure with a red head between two red panels, presiding over a gathered crowd",
+      },
+      {
+        src: "/journey/journey-art-2.jpg",
+        alt: "Midjourney artwork — a black dragon-like phoenix entwined with orange flame, ink illustration style",
+      },
+      {
+        src: "/journey/journey-art-3.jpg",
+        alt: "Midjourney artwork — a village with church spires rising through morning mist",
+      },
+    ],
+    cta: { label: "View MED", href: "#work" },
+  },
 
   education: {
     degree: "B.E./B.Tech Mechanical Engineering",
