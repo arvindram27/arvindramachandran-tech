@@ -21,6 +21,14 @@
   --color-accent-strong: #92400e;
 }
 
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
