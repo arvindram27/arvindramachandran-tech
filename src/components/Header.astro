@@ -2,7 +2,7 @@
 import { site } from "../data/site";
 ---
 
-<header class="sticky top-0 z-40 border-b border-line bg-paper">
+<header class="sticky top-0 z-50 border-b border-line bg-paper">
   <div class="mx-auto max-w-5xl px-4 sm:px-6">
     <div class="flex h-16 items-center justify-between gap-3 sm:hidden">
       <a
@@ -65,48 +65,108 @@ import { site } from "../data/site";
         </a>
       </nav>
     </div>
-
-    <div class="relative pb-2.5 sm:hidden" data-nav-fades>
-      <div class="no-scrollbar flex gap-2 overflow-x-auto whitespace-nowrap" data-nav-scroll>
-        {
-          site.nav.map((item) => (
-            <a
-              href={item.href}
-              class="shrink-0 rounded-full border border-line px-3.5 py-1.5 text-sm text-muted transition-colors hover:border-ink/20 hover:text-ink"
-            >
-              {item.label}
-            </a>
-          ))
-        }
-      </div>
-      <div
-        data-fade="left"
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-linear-to-r from-paper to-transparent opacity-0 transition-opacity"
-      ></div>
-      <div
-        data-fade="right"
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-linear-to-l from-paper to-transparent transition-opacity"
-      ></div>
-    </div>
   </div>
 </header>
 
-<script>
-  const wrap = document.querySelector("[data-nav-fades]");
-  const scroller = wrap ? wrap.querySelector<HTMLElement>("[data-nav-scroll]") : null;
-  const left = wrap ? wrap.querySelector<HTMLElement>('[data-fade="left"]') : null;
-  const right = wrap ? wrap.querySelector<HTMLElement>('[data-fade="right"]') : null;
+<div class="pill-nav sticky top-16 z-40 bg-paper sm:hidden" data-pill-nav data-tucked="false">
+  <div class="relative mx-auto max-w-5xl px-4 pb-2.5 sm:px-6" data-nav-fades>
+    <div class="no-scrollbar flex gap-2 overflow-x-auto whitespace-nowrap" data-nav-scroll>
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            class="shrink-0 rounded-full border border-line px-3.5 py-1.5 text-sm text-muted transition-colors hover:border-ink/20 hover:text-ink"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+    <div
+      data-fade="left"
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-linear-to-r from-paper to-transparent opacity-0 transition-opacity"
+    ></div>
+    <div
+      data-fade="right"
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-y-0 right-0 w-8 bg-linear-to-l from-paper to-transparent transition-opacity"
+    ></div>
+  </div>
+</div>
 
-  if (wrap && scroller && left && right) {
-    const update = () => {
+<style>
+  .pill-nav {
+    transition: transform 250ms ease-in-out;
+  }
+
+  .pill-nav[data-tucked="true"] {
+    transform: translateY(-110%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pill-nav {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const navWrap = document.querySelector("[data-nav-fades]");
+  const scroller = navWrap ? navWrap.querySelector<HTMLElement>("[data-nav-scroll]") : null;
+  const left = navWrap ? navWrap.querySelector<HTMLElement>('[data-fade="left"]') : null;
+  const right = navWrap ? navWrap.querySelector<HTMLElement>('[data-fade="right"]') : null;
+
+  if (navWrap && scroller && left && right) {
+    const updateFades = () => {
       const max = scroller.scrollWidth - scroller.clientWidth;
       left.classList.toggle("opacity-0", scroller.scrollLeft <= 4);
       right.classList.toggle("opacity-0", scroller.scrollLeft >= max - 4);
     };
-    scroller.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
+    scroller.addEventListener("scroll", updateFades, { passive: true });
+    window.addEventListener("resize", updateFades);
+    updateFades();
+  }
+
+  const pillNav = document.querySelector<HTMLElement>("[data-pill-nav]");
+
+  if (pillNav) {
+    const TOP_SHOW = 4;
+    const MIN_DELTA = 4;
+    const HIDE_AFTER = 80;
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const show = () => {
+      pillNav.dataset.tucked = "false";
+      pillNav.removeAttribute("inert");
+    };
+    const tuck = () => {
+      pillNav.dataset.tucked = "true";
+      pillNav.setAttribute("inert", "");
+    };
+
+    const updateTuck = () => {
+      ticking = false;
+      const y = window.scrollY;
+      if (y <= TOP_SHOW) {
+        show();
+        lastY = y;
+        return;
+      }
+      const delta = y - lastY;
+      if (Math.abs(delta) < MIN_DELTA) return;
+      if (delta > 0 && y > HIDE_AFTER) tuck();
+      else show();
+      lastY = y;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateTuck);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateTuck();
   }
 </script>
