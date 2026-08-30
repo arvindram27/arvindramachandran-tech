@@ -20,7 +20,7 @@ const stageAria = stages.map((s) => s.label).join(" → ");
 
 <section id="work" aria-labelledby="work-heading" class="border-t border-line scroll-mt-28 sm:scroll-mt-20">
   <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
-    <div class="grid gap-8 md:grid-cols-[180px_1fr] md:gap-16">
+    <div class="reveal grid gap-8 md:grid-cols-[180px_1fr] md:gap-16" data-reveal>
       <div>
         <p class="font-mono text-sm font-medium text-muted">Work</p>
       </div>
@@ -39,7 +39,7 @@ const stageAria = stages.map((s) => s.label).join(" → ");
       </div>
     </div>
 
-    <div class="mt-12 hidden md:block">
+    <div class="reveal mt-12 hidden md:block" data-reveal>
       <svg
         class="w-full max-w-[720px]"
         viewBox={`0 0 ${svgW} ${svgH}`}
@@ -90,7 +90,7 @@ const stageAria = stages.map((s) => s.label).join(" → ");
       </svg>
     </div>
 
-    <ol class="mt-10 flex flex-col gap-2 md:hidden">
+    <ol class="reveal mt-10 flex flex-col gap-2 md:hidden" data-reveal>
       {stages.map((stage, i) => (
         <>
           <li class="flex items-baseline gap-3 border border-line px-4 py-3">
@@ -105,11 +105,11 @@ const stageAria = stages.map((s) => s.label).join(" → ");
       ))}
     </ol>
 
-    <p class="mt-12 font-mono text-sm text-muted">
+    <p class="reveal mt-12 font-mono text-sm text-muted" data-reveal="fade">
       <span class="font-medium text-ink">Stack</span> — {site.med.stack.join(" · ")}
     </p>
 
-    <div class="mt-6 flex flex-wrap items-center gap-6">
+    <div class="reveal mt-6 flex flex-wrap items-center gap-6" data-reveal="fade">
       <a
         href={site.med.repoUrl}
         class="text-sm font-medium text-accent underline-offset-4 hover:text-accent-strong hover:underline"

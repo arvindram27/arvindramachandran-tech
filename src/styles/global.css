@@ -29,6 +29,43 @@
   }
 }
 
+/*
+  Scroll-reveal system — generic site-wide pattern modeled on the Journey timeline nodes
+  (opacity 0→1 + translateY 20px→0, 300ms ease-out, fire-once).
+  data-reveal (bare) = fade + slide; data-reveal="fade" = fade only.
+  The hidden state is applied by JS only — no-JS and reduced-motion render everything visible.
+*/
+.reveal {
+  transition:
+    opacity 300ms ease-out,
+    transform 300ms ease-out;
+}
+
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reveal-hidden[data-reveal="fade"] {
+  transform: none;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+  }
+
+  .reveal-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
