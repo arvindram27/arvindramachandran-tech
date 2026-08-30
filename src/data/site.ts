@@ -40,7 +40,8 @@ export type SiteContent = {
   hero: {
     positioning: string;
     stack: string[];
-    ctas: { primary: NavItem; secondary: NavItem };
+    ctas: { primary: NavItem };
+    socials: { name: string; href: string; icon: "github" | "linkedin" }[];
   };
   about: string[];
   med: {
@@ -74,6 +75,12 @@ export type SiteContent = {
   certifications: Certification[];
 };
 
+// Canonical external links — single source; hero socials and the future footer render from these.
+export const links = {
+  github: "https://github.com/arvindram27",
+  linkedin: "https://www.linkedin.com/in/arvind-ramachandran-r",
+} as const;
+
 export const site: SiteContent = {
   name: "Arvind Ramachandran",
   domain: "arvindramachandran.tech",
@@ -81,10 +88,7 @@ export const site: SiteContent = {
   location: "Chennai, Tamil Nadu — open to Startup & GCC roles",
 
   // Phone number deliberately excluded from the public site (decision logged in build-log Session 0; lives on the resume PDF only).
-  links: {
-    github: "https://github.com/arvindram27",
-    linkedin: "https://www.linkedin.com/in/arvindramachandran-r",
-  },
+  links: { ...links },
 
   // TODO(AR): replace the placeholder at public/resume.pdf with the real current resume (Module 8).
   resumePath: "/resume.pdf",
@@ -102,8 +106,11 @@ export const site: SiteContent = {
     stack: ["Python", "SQL", "Databricks", "AWS", "LangGraph"],
     ctas: {
       primary: { label: "View MED", href: "#work" },
-      secondary: { label: "Resume", href: "/resume.pdf" },
     },
+    socials: [
+      { name: "GitHub", href: links.github, icon: "github" },
+      { name: "LinkedIn", href: links.linkedin, icon: "linkedin" },
+    ],
   },
 
   about: [

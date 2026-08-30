@@ -135,3 +135,17 @@ Read this file at the start of every session before touching code.
 - Files touched: src/components/Journey.astro (script block rewritten, reduced-motion CSS addition, noscript added), build-log.md (appended)
 - Known issues: visual confirmation of per-node reveal pacing + reduced-motion emulation needs a manual scroll pass on the dev server
 - Next module: Module 8 — Education/Certifications + Contact/Footer + OG image + resume.pdf placeholder
+
+## Hero secondary CTA → social icon links — 2026-08-31
+- Built: hero's secondary "Resume" button (next to View MED) replaced with two icon-only links — GitHub (github.com/arvindram27) and LinkedIn — rendered from new site.hero.socials data. Monochrome brand marks (standard GitHub octocat + LinkedIn glyph paths, fill=currentColor, 16px glyphs) per user choice over line-style icons; classes p-2 text-muted hover:text-ink (~32px tap target, no fill/border → clearly secondary to the solid amber View MED, hover mirrors nav's muted→ink); target="_blank" rel="noopener noreferrer" + aria-label on each; kept in the same mt-10 flex-wrap gap-4 container — identical spacing rhythm, wraps safely at 375px. Nav Resume button untouched. Data: new canonical `export const links` in site.ts (github + LinkedIn) — site.links spreads from it and hero.socials references it, so footer/Contact will render the same URLs.
+- Key decisions: LinkedIn URL canonicalized to the hyphenated slug https://www.linkedin.com/in/arvind-ramachandran-r (user confirmed; PRD §6.7's arvindramachandran-r superseded — old slug verified absent from built HTML); ctas.secondary removed from the hero type (nav consumes site.resumePath directly, unaffected)
+- Files touched: src/data/site.ts (links const, hero socials + type), src/components/Hero.astro (icon paths + socials map replacing Resume button), build-log.md (appended)
+- Known issues: none new (verified /resume.pdf appears exactly once in built HTML — nav only; build + astro check clean)
+- Next module: Module 8 — Education/Certifications + Contact/Footer + OG image + resume.pdf placeholder
+
+## Hero social icon sizing tweak — 2026-08-31
+- Built: user-requested ~20% enlargement of the hero GitHub/LinkedIn icons. Glyphs h-4 w-4 (16px) → h-5 w-5 (20px, nearest on-scale Tailwind step per user choice over exact 19.2px); link padding p-2 → p-1.5 so each link's total footprint stays exactly 32px — layout rhythm next to View MED and 375px wrap behavior unchanged, only the glyph grows. Hover/aria/target attrs untouched. Verified: build + astro check clean; h-5 glyphs + p-1.5 present in built HTML, old p-2 classes absent.
+- Key decisions: on-scale 20px over arbitrary 19.2px; footprint-preserving padding rebalance honors the earlier "layout must not visually shift" directive
+- Files touched: src/components/Hero.astro (two class changes), build-log.md (appended)
+- Known issues: none
+- Next module: Module 8 — Education/Certifications + Contact/Footer + OG image + resume.pdf placeholder
