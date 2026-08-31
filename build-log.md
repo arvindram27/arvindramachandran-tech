@@ -192,3 +192,10 @@ Read this file at the start of every session before touching code.
 - Files touched: src/components/Header.astro (one class), build-log.md (appended)
 - Known issues: manual eyeball — 375px (no line between header and pills; tuck behavior unaffected), 768/1440 (divider intact)
 - Next module: Module 8 — Education/Certifications + Contact/Footer + OG image + resume.pdf placeholder
+
+## Mobile-only spacing tighten — pill nav → hero — 2026-09-01
+- Built: reduced hero top padding on mobile (pt-20 → pt-12, 80px → 48px) — leftover from Module 3 sizing when the header was a single 64px row; the pill-nav redesign added ~48px of nav chrome, making the pill-row → kicker gap ~90px. Now ~58px (48px hero pt + 10px pill-row padding) — proportionate for mobile, roughly half the desktop value per the requested scaled ratio. Scoped to <640px (sm boundary, same as pill nav): desktop/tablet sm:pt-28 (112px) byte-identical. Audit of other section boundaries performed: About/Work/Projects/Skills/Journey all use uniform py-16 sm:py-24 (symmetric 64px mobile rhythm around each divider) — no leftover excess, no fix needed; hero bottom pb-24 is protected (explicitly increased last module at user request, "space between CTAs and About, don't shrink"). Verified in built output: pt-12 pb-24 present, pt-20 absent, sm:pt-28 intact; build + astro check clean (13 files, 0 errors).
+- Key decisions: pt-12 (48px) over pt-10 (40px) as the on-scale midpoint — tunable on eyeball; only hero top touched, section rhythm left uniform
+- Files touched: src/components/Hero.astro (one class), build-log.md (appended)
+- Known issues: manual eyeball at 375px (pill nav → kicker gap); if still too generous, pt-10 is a one-class change
+- Next module: Module 8 — Education/Certifications + Contact/Footer + OG image + resume.pdf placeholder
