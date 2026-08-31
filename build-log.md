@@ -185,3 +185,10 @@ Read this file at the start of every session before touching code.
 - Files touched: src/components/Hero.astro (script block only), build-log.md (appended)
 - Known issues: manual pass needed — 375px (no play at load even with edge peek; plays on scroll into view), 768/1440 (plays at load), reduced-motion static
 - Next module: Module 8 — Education/Certifications + Contact/Footer + OG image + resume.pdf placeholder
+
+## Header divider removed on mobile only — 2026-09-01
+- Built: the header's border-b divider (which sat between the header and the pill nav row, visually boxing in the decoupled pills) is now suppressed below 640px via a single Tailwind v4 max-sm variant: header classes `border-b border-line bg-paper` + `max-sm:border-b-0`. ≥640px (tablet/desktop) renders the divider exactly as before. Boundary decision: the user instruction cited "the pill-nav layout switch and the PAL chart repositioning" as one boundary, but the codebase has two — pill nav switches at sm (640px), PAL chart at md (768px); since the divider issue only exists where the pill row lives (<640px), the removal is scoped to sm — scoping to md would have stripped the divider from the desktop-style header in the 640–767px range where no pill row exists. Verified in built output: .max-sm\:border-b-0 rule emitted inside `@media not all and (width>=40rem)` (= width<640px); base border rules and --color-line unchanged; build + astro check clean (13 files, 0 errors).
+- Key decisions: max-sm variant over a scoped media-query block (single-class change, v4-native); borderless mobile header pairs with the already-borderless pill row — the two layers now read as one clean paper surface with no hard line
+- Files touched: src/components/Header.astro (one class), build-log.md (appended)
+- Known issues: manual eyeball — 375px (no line between header and pills; tuck behavior unaffected), 768/1440 (divider intact)
+- Next module: Module 8 — Education/Certifications + Contact/Footer + OG image + resume.pdf placeholder
