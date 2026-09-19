@@ -8,16 +8,15 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"]
-  }
-  // TODO(AR): after `wrangler d1 create portfolio-contact`, uncomment and paste the database ID.
-  // "d1_databases": [
-  //   {
-  //     "binding": "CONTACT_DB",
-  //     "database_name": "portfolio-contact",
-  //     "database_id": "<D1_ID>",
-  //     "migrations_dir": "./migrations"
-  //   }
-  // ],
+  },
+  "d1_databases": [
+    {
+      "binding": "CONTACT_DB",
+      "database_name": "portfolio-contact",
+      "database_id": "9c57de03-7071-4e58-8bfb-696940df4cc9",
+      "migrations_dir": "./migrations"
+    }
+  ],
   // TODO(AR): set real addresses once known (or manage via dashboard Variables).
   // "vars": {
   //   "NOTIFY_EMAIL": "<notify-email>",

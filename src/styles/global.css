@@ -66,6 +66,25 @@
   }
 }
 
+/*
+  Contact form success animation — subtle scale + fade-in.
+  Fires once when the success div is unhidden by JS.
+*/
+@keyframes success-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+[data-contact-success]:not([hidden]) {
+  animation: success-reveal 0.4s ease-out forwards;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
