@@ -29,6 +29,21 @@ export type Certification = {
   verifyUrl: string | null;
 };
 
+export type ContactConfig = {
+  title: string;
+  endpoint: string;
+  submitLabel: string;
+  sendingLabel: string;
+  successMessage: string;
+  errorMessage: string;
+  noscriptNote: string;
+  nameMaxLength: number;
+  emailMaxLength: number;
+  messageMaxLength: number;
+  honeypotField: string;
+  whatsappHref: string | null;
+};
+
 export type SiteContent = {
   name: string;
   domain: string;
@@ -73,6 +88,7 @@ export type SiteContent = {
     period: string;
   };
   certifications: Certification[];
+  contact: ContactConfig;
 };
 
 // Canonical external links — single source; hero socials and the future footer render from these.
@@ -256,4 +272,22 @@ export const site: SiteContent = {
       verifyUrl: null,
     },
   ],
+
+  contact: {
+    title: "Come, Say Hi! 👋",
+    endpoint: "/api/contact",
+    submitLabel: "Send message",
+    sendingLabel: "Sending…",
+    successMessage:
+      "Thanks for reaching out to me! I've received your message and I would personally get back!",
+    errorMessage:
+      "Something went wrong sending your message. Please try again, or reach me through one of the links above.",
+    noscriptNote: "This form needs JavaScript to send. Please email me directly instead.",
+    nameMaxLength: 120,
+    emailMaxLength: 254,
+    messageMaxLength: 2000,
+    honeypotField: "company",
+    // TODO(AR): set your public WhatsApp link, e.g. "https://wa.me/15551234567" (international digits, no +, spaces, or dashes; 555 number shown is a fictional-format example). The link stays hidden until set.
+    whatsappHref: null,
+  },
 };

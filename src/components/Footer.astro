@@ -1,0 +1,40 @@
+---
+import { site } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line">
+  <div
+    class="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between"
+  >
+    <p class="font-mono text-xs text-muted">
+      © {year} {site.name} · {site.domain}
+    </p>
+    <p class="font-mono text-xs text-muted">{site.location}</p>
+    <nav aria-label="Footer" class="flex flex-wrap items-center gap-x-5 gap-y-2">
+      <a
+        href={`mailto:${site.email}`}
+        class="font-mono text-xs text-muted hover:text-ink"
+      >
+        Email
+      </a>
+      <a
+        href={site.links.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-mono text-xs text-muted hover:text-ink"
+      >
+        GitHub
+      </a>
+      <a
+        href={site.links.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-mono text-xs text-muted hover:text-ink"
+      >
+        LinkedIn
+      </a>
+    </nav>
+  </div>
+</footer>
