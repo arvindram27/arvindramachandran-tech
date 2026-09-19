@@ -287,7 +287,6 @@ export const site: SiteContent = {
     emailMaxLength: 254,
     messageMaxLength: 2000,
     honeypotField: "company",
-    // TODO(AR): set your public WhatsApp link, e.g. "https://wa.me/15551234567" (international digits, no +, spaces, or dashes; 555 number shown is a fictional-format example). The link stays hidden until set.
-    whatsappHref: null,
+    whatsappHref: "https://wa.me/917358742925",
   },
 };
