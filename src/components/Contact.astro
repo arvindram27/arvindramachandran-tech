@@ -119,15 +119,6 @@ const notifyFailedMessage = `Your message was saved, but the email notification 
         >
           {contact.submitLabel}
         </button>
-        <div data-contact-success hidden class="mt-8 border border-line p-8 text-center">
-          <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-line">
-            <svg class="h-6 w-6 text-ink" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <p class="font-display text-xl font-semibold text-ink">Message sent</p>
-          <p class="mt-2 text-sm text-muted">Thanks for reaching out!</p>
-        </div>
         <noscript>
           <p class="mt-6 text-sm text-muted">
             {contact.noscriptNote}{" "}
@@ -140,6 +131,15 @@ const notifyFailedMessage = `Your message was saved, but the email notification 
           </p>
         </noscript>
       </form>
+      <div data-contact-success hidden class="mt-10 max-w-xl border border-line p-8 text-center">
+        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-line">
+          <svg class="h-6 w-6 text-ink" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <p class="font-display text-xl font-semibold text-ink">Message sent</p>
+        <p class="mt-2 text-sm text-muted">Thanks for reaching out!</p>
+      </div>
     </div>
   </div>
 </section>
@@ -150,7 +150,7 @@ const notifyFailedMessage = `Your message was saved, but the email notification 
   if (form) {
     const status = form.querySelector<HTMLElement>("[data-contact-status]");
     const submit = form.querySelector<HTMLButtonElement>("[data-contact-submit]");
-    const success = form.querySelector<HTMLElement>("[data-contact-success]");
+    const success = document.querySelector<HTMLElement>("[data-contact-success]");
     const endpoint = form.dataset.endpoint ?? "/api/contact";
     const fallbackError =
       form.dataset.errorMessage ?? "Something went wrong. Please try again.";
