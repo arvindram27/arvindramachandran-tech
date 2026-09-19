@@ -1,7 +1,11 @@
-// POST /api/contact — Pages Function: validate, honeypot-filter, store in D1, notify via Resend.
+// Worker entry: serves static assets, handles POST /api/contact.
+// Contact logic: validate, honeypot-filter, store in D1, notify via Resend.
 // All secrets and bindings live server-side in `env`; nothing here reaches the browser.
 
-interface ContactEnv {
+interface WorkerEnv {
+  ASSETS: {
+    fetch(request: Request): Promise<Response>;
+  };
   CONTACT_DB: D1Database;
   RESEND_API_KEY: string;
   NOTIFY_EMAIL: string;
@@ -15,11 +19,6 @@ interface D1Database {
 interface D1PreparedStatement {
   bind(...values: Array<string | number | null>): D1PreparedStatement;
   run(): Promise<{ success: boolean }>;
-}
-
-interface ContactContext {
-  request: Request;
-  env: ContactEnv;
 }
 
 interface ContactPayload {
@@ -47,9 +46,7 @@ function asText(value: unknown): string {
   return typeof value === "string" ? value.trim() : "";
 }
 
-export async function onRequestPost(context: ContactContext): Promise<Response> {
-  const { request, env } = context;
-
+async function handleContact(request: Request, env: WorkerEnv): Promise<Response> {
   if (!request.headers.get("content-type")?.includes("application/json")) {
     return jsonResponse({ ok: false, error: "invalid_content_type" }, 415);
   }
@@ -144,3 +141,16 @@ export async function onRequestPost(context: ContactContext): Promise<Response> 
 
   return jsonResponse({ ok: true }, 200);
 }
+
+export default {
+  async fetch(request: Request, env: WorkerEnv): Promise<Response> {
+    const pathname = new URL(request.url).pathname.replace(/\/+$/, "") || "/";
+    if (pathname === "/api/contact") {
+      if (request.method !== "POST") {
+        return jsonResponse({ ok: false, error: "method_not_allowed" }, 405);
+      }
+      return handleContact(request, env);
+    }
+    return env.ASSETS.fetch(request);
+  },
+};

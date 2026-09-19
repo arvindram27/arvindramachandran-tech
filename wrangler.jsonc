@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "arvindramachandran-tech",
+  "main": "./src/worker.ts",
+  // Keep within ~30 days; update periodically.
+  "compatibility_date": "2026-09-19",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  }
+  // TODO(AR): after `wrangler d1 create portfolio-contact`, uncomment and paste the database ID.
+  // "d1_databases": [
+  //   {
+  //     "binding": "CONTACT_DB",
+  //     "database_name": "portfolio-contact",
+  //     "database_id": "<D1_ID>",
+  //     "migrations_dir": "./migrations"
+  //   }
+  // ],
+  // TODO(AR): set real addresses once known (or manage via dashboard Variables).
+  // "vars": {
+  //   "NOTIFY_EMAIL": "<notify-email>",
+  //   "CONTACT_FROM_EMAIL": "<verified-sender>"
+  // }
+}
