@@ -24,7 +24,7 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
 
         <ol class="relative mt-14 space-y-14" data-journey>
           <div class="absolute top-3 bottom-3 left-[5px] w-[2px] bg-line" aria-hidden="true">
-            <div class="journey-fill h-0 w-full bg-ink"></div>
+            <div class="journey-fill h-full w-full origin-top scale-y-0 bg-ink"></div>
           </div>
           {
             nodes.map((node, i) => (
@@ -101,7 +101,7 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
 <noscript>
   <style>
     .journey-fill {
-      height: 100% !important;
+      transform: scaleY(1) !important;
     }
   </style>
 </noscript>
@@ -109,12 +109,13 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
 <style>
   .journey-node {
     transition:
-      opacity 300ms ease-out,
-      transform 300ms ease-out;
+      opacity 300ms var(--motion-ease-out),
+      transform 300ms var(--motion-ease-out);
   }
 
   .journey-fill {
-    transition: height 300ms ease-out;
+    transform-origin: top;
+    transition: transform 300ms var(--motion-ease-out);
   }
 
   .journey-hidden {
@@ -139,7 +140,7 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
     }
 
     .journey-fill {
-      height: 100% !important;
+      transform: scaleY(1) !important;
     }
   }
 </style>
@@ -148,22 +149,30 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
   const timeline = document.querySelector("[data-journey]");
   const nodes = timeline ? timeline.querySelectorAll(".journey-node") : [];
   const fill = timeline ? timeline.querySelector<HTMLElement>(".journey-fill") : null;
+  const track = fill ? fill.parentElement : null;
 
   if (
     timeline &&
     fill &&
+    track &&
     nodes.length > 0 &&
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   ) {
     for (const node of nodes) node.classList.add("journey-hidden");
 
     const revealed = new Set<Element>();
-    let filled = 0;
+    let filled = 0; // scaleY ratio 0..1
+
+    const trackHeight = () => track.clientHeight || 1;
+    const applyFill = (ratio: number) => {
+      fill.style.transform = `scaleY(${ratio})`;
+    };
 
     const extendTo = (node: Element) => {
       const target = (node as HTMLElement).offsetTop;
-      filled = Math.max(filled, target);
-      fill.style.height = `${Math.round(filled)}px`;
+      const ratio = Math.min(1, target / trackHeight());
+      filled = Math.max(filled, ratio);
+      applyFill(filled);
     };
 
     const reveal = new IntersectionObserver(
@@ -184,8 +193,8 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
     window.addEventListener("resize", () => {
       let max = 0;
       for (const node of revealed) max = Math.max(max, (node as HTMLElement).offsetTop);
-      filled = max;
-      fill.style.height = `${Math.round(filled)}px`;
+      filled = Math.min(1, max / trackHeight());
+      applyFill(filled);
     });
   }
 </script>
