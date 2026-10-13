@@ -88,11 +88,28 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Mobile-native (skill: mobile-native §2/§baseline): no gray/blue flash on tap,
+       and no iOS font inflation in landscape. */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     @apply bg-paper font-sans text-ink antialiased;
     text-rendering: optimizeLegibility;
+  }
+
+  /* Controls respond instantly on touch (no 300ms double-tap wait) and never
+     long-press-select their label. Body text is untouched — it stays selectable. */
+  button,
+  a {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  a {
+    -webkit-touch-callout: none; /* no long-press copy/share callout on link controls */
   }
 
   ::selection {
