@@ -291,3 +291,10 @@ Read this file at the start of every session before touching code.
 - Files touched: src/styles/global.css (plane-step, link-draw, card-interactive, icon-lift, btn-press + reduced-motion/hover guards), src/components/Hero.astro (hero-step rise, btn-press, icon-lift), src/components/Header.astro (btn-press ×2), src/components/MedCaseStudy.astro (plane-step stagger, link-draw), src/components/SecondaryProjects.astro (card-interactive, link-draw), src/components/Journey.astro (journey-dot, journey-art, btn-press), src/components/Contact.astro (icon-lift, btn-press, link-draw), build-log.md (appended)
 - Known issues: none
 - Next module: optional copy humanizing pass, remaining P2 items (#9/#10/#12), or Module 8b assets (OG image, real resume.pdf)
+
+## Footer simplification & colophon scale-up — 2026-10-15
+- Built: simplified `Footer.astro` to a single responsive flex row (`flex-col gap-3 sm:flex-row sm:items-center sm:justify-between`) containing only the copyright line (`© {year} Arvind Ramachandran · arvindramachandran.tech`) and the colophon (`Built with Astro · deployed on Cloudflare Workers`), removing the duplicate location line and `Email / GitHub / LinkedIn` nav (both already present immediately above in `#contact` and in the Hero). Scaled up the colophon text from `text-xs` (12px) to `text-sm sm:text-base` (14px→16px) and enlarged the monochrome Astro & Cloudflare SVG marks from `h-3.5 w-3.5` (14px) to `h-4 w-4 sm:h-5 sm:w-5` (16px→20px). Verified: build + deploy clean, all 5 footer checks confirmed in built HTML.
+- Key decisions: removing duplicate location + social links from the footer eliminates redundancy right below `#contact` and lets the copyright + colophon sit cleanly on a single row at `sm+`.
+- Files touched: src/components/Footer.astro, build-log.md (appended)
+- Known issues: none
+- Next module: optional copy humanizing pass, remaining P2 items (#9/#10/#12), or Module 8b assets (OG image, real resume.pdf)
