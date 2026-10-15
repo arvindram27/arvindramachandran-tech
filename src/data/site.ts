@@ -116,7 +116,7 @@ export const site: SiteContent = {
   name: "Arvind Ramachandran",
   domain: "arvindramachandran.tech",
   email: "arvind@arvindramachandran.tech",
-  location: "Chennai, Tamil Nadu — open to Startup & GCC roles",
+  location: "Chennai, Tamil Nadu · open to Startup & GCC roles",
 
   // Phone number deliberately excluded from the public site (decision logged in build-log Session 0; lives on the resume PDF only).
   links: { ...links },
@@ -133,7 +133,7 @@ export const site: SiteContent = {
 
   hero: {
     positioning:
-      "Data Engineer building production-grade financial intelligence systems — self-taught, project-proven.",
+      "Data Engineer building production-grade financial intelligence systems. Self-taught, project-proven.",
     stack: ["Python", "SQL", "Databricks", "Airflow", "AWS", "LangGraph"],
     ctas: {
       primary: { label: "View MED", href: "#work" },
@@ -146,19 +146,19 @@ export const site: SiteContent = {
 
   about: [
     "Self-taught Data Engineer transitioning from a Mechanical Engineering background (B.Tech, Saveetha Engineering College, 2017) through focused self-study and hands-on project work. Working primarily in Python, SQL, Databricks, and AWS, with growing depth in applied GenAI and agentic systems.",
-    "Currently building MED, a multi-agent financial intelligence system, as a proof-of-skill anchor. Based in Chennai, targeting Data/Analytics/Applied AI Engineering roles — FinTech & AI sector primarily, Startup & GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step.",
+    "Currently building MED, a multi-agent financial intelligence system, as a proof-of-skill anchor. Based in Chennai, targeting Data/Analytics/Applied AI Engineering roles, FinTech & AI sector primarily, Startup & GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step.",
   ],
 
   med: {
-    name: "MED — Market Efficiency Detector",
+    name: "MED: Market Efficiency Detector",
     shortName: "MED",
     status:
-      "In development — v2 (Dual-Agent Live System) shipping, v2.5 Signal Layer next · Last major revision: PRD v3.0, September 2026",
+      "In development: v2 (Dual-Agent Live System) shipping, v2.5 Signal Layer next · Last major revision: PRD v3.0, September 2026",
     framing: "VIX measures fear. PAL measures how long the market takes to react.",
     description: [
-      "MED (Market Efficiency Detector) measures Price Adjustment Latency (PAL) — the delay between when material information hits the market and when price fully reflects it — and tests whether that latency window is tradeable after costs.",
+      "MED (Market Efficiency Detector) measures Price Adjustment Latency (PAL): the delay between when material information hits the market and when price fully reflects it. It then tests whether that latency window is tradeable after costs.",
       "The system runs on a dual-plane architecture: a Kafka/Redpanda live path detects events and emits position signals within a 5-second latency budget, while an Airflow-orchestrated research plane runs nightly recomputation, walk-forward backtesting on Databricks, and weekly model retraining. LangGraph agents (Statistician + Contextualist) analyze price anomalies and news sentiment in parallel before a Decision Maker agent generates the signal.",
-      "The project is deliberately validation-first: every backtest result is reported gross and net of a full transaction-cost model, tested walk-forward with purging and embargo to avoid lookahead bias, and benchmarked against a random-entry control. A negative result — the edge existing but being fully consumed by costs — is treated as a legitimate, publishable finding, not a failure.",
+      "The project is deliberately validation-first: every backtest result is reported gross and net of a full transaction-cost model, tested walk-forward with purging and embargo to avoid lookahead bias, and benchmarked against a random-entry control. A negative result, where the edge exists but is fully consumed by costs, is treated as a legitimate, publishable finding, not a failure.",
     ],
     architecture: {
       live: {
@@ -238,7 +238,7 @@ export const site: SiteContent = {
 
   journey: {
     intro: [
-      "From a mechanical engineering degree and years of competitive-exam preparation to building a multi-agent market intelligence system — a nine-year arc of self-directed pivots. The short version: capital-markets curiosity, one pivotal book, generative-art experiments, and a deepening focus on AI agents, all converging in MED.",
+      "From a mechanical engineering degree and years of competitive-exam preparation to building a multi-agent market intelligence system. A nine-year arc of self-directed pivots. The short version: capital-markets curiosity, one pivotal book, generative-art experiments, and a deepening focus on AI agents, all converging in MED.",
     ],
     nodes: [
       {
@@ -250,7 +250,7 @@ export const site: SiteContent = {
       {
         era: "2017–2025",
         title: "An interest takes root",
-        body: "Eight years preparing for those exams meant living inside the Indian economy — budgets, monetary policy, capital markets. The exams didn't work out. The interest never left.",
+        body: "Eight years preparing for those exams meant living inside the Indian economy: budgets, monetary policy, capital markets. The exams didn't work out. The interest never left.",
         weight: "normal",
       },
       {
@@ -262,7 +262,7 @@ export const site: SiteContent = {
       {
         era: "Experiments",
         title: "Generative art",
-        body: "The pivot started visually. Months inside Midjourney — learning to think in prompts, how these models compose, iterate, surprise.",
+        body: "The pivot started visually. Months inside Midjourney, learning to think in prompts, how these models compose, iterate, surprise.",
         weight: "normal",
       },
       {
@@ -273,23 +273,23 @@ export const site: SiteContent = {
       },
       {
         era: "Now",
-        title: "MED — Market Efficiency Detector",
-        body: "Two threads converge: capital markets from the exam years, agents from the curiosity years. MED measures how long the market takes to react — built in public, one module at a time.",
+        title: "MED: Market Efficiency Detector",
+        body: "Two threads converge: capital markets from the exam years, agents from the curiosity years. MED measures how long the market takes to react, built in public, one module at a time.",
         weight: "normal",
       },
     ],
     artwork: [
       {
         src: "/journey/journey-art-1.jpg",
-        alt: "Midjourney artwork — a monumental white figure with a red head between two red panels, presiding over a gathered crowd",
+        alt: "Midjourney artwork: a monumental white figure with a red head between two red panels, presiding over a gathered crowd",
       },
       {
         src: "/journey/journey-art-2.jpg",
-        alt: "Midjourney artwork — a black dragon-like phoenix entwined with orange flame, ink illustration style",
+        alt: "Midjourney artwork: a black dragon-like phoenix entwined with orange flame, ink illustration style",
       },
       {
         src: "/journey/journey-art-3.jpg",
-        alt: "Midjourney artwork — a village with church spires rising through morning mist",
+        alt: "Midjourney artwork: a village with church spires rising through morning mist",
       },
     ],
     cta: { label: "View MED", href: "#work" },

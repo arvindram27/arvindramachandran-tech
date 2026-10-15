@@ -18,7 +18,7 @@ type DirectLinkIcon = keyof typeof iconPaths;
 const directLinks: { label: string; href: string; external: boolean; icon: DirectLinkIcon }[] = [
   { label: "LinkedIn", href: site.links.linkedin, external: true, icon: "linkedin" },
   { label: "GitHub", href: site.links.github, external: true, icon: "github" },
-  { label: `Email — ${site.email}`, href: `mailto:${site.email}`, external: false, icon: "mail" },
+  { label: `Email: ${site.email}`, href: `mailto:${site.email}`, external: false, icon: "mail" },
   ...(contact.whatsappHref
     ? [{ label: "WhatsApp", href: contact.whatsappHref, external: true, icon: "whatsapp" as const }]
     : []),
