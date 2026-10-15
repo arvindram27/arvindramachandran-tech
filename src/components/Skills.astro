@@ -12,10 +12,8 @@ const groups = site.skills;
       </div>
       <dl class="divide-y divide-line">
         {
-          groups.map((group, i) => (
-            <div
-              class={`grid gap-1 pb-5 sm:grid-cols-[220px_1fr] sm:gap-8 ${i === groups.length - 1 ? "" : "mb-5"} ${i === 0 ? "pt-0" : "pt-5"}`}
-            >
+          groups.map((group) => (
+            <div class="grid gap-1 py-4 first:pt-0 last:pb-0 sm:grid-cols-[200px_1fr] sm:items-baseline sm:gap-8">
               <dt class="font-mono text-sm text-muted">{group.category}</dt>
               <dd class="text-base leading-relaxed text-ink">{group.items.join(" · ")}</dd>
             </div>

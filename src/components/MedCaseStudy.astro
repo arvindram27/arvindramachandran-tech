@@ -17,10 +17,10 @@ const [fearLine, palLine] = site.med.framing
       </div>
       <div>
         <p class="font-mono text-sm text-muted">{site.med.status}</p>
-        <h2 id="work-heading" class="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+        <h2 id="work-heading" class="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
           {site.med.name}
         </h2>
-        <p class="mt-8 font-display text-2xl font-medium leading-snug sm:text-3xl">
+        <p class="mt-6 font-display text-2xl font-medium leading-snug tracking-[-0.015em] sm:text-3xl">
           <span class="text-ink">{fearLine}</span>
           <span class="text-accent"> {palLine}</span>
         </p>
@@ -43,14 +43,14 @@ const [fearLine, palLine] = site.med.framing
             <ol class="mt-3 flex flex-col gap-2 sm:flex-row sm:items-stretch">
               {plane.steps.map((step, i) => (
                 <>
-                  <li class="border border-line bg-paper px-4 py-3 sm:min-w-0 sm:flex-1">
+                  <li class="flex flex-col justify-between gap-1 border border-line bg-paper px-4 py-3.5 sm:min-w-0 sm:flex-1">
                     <span class="block text-sm font-medium text-ink">{step.label}</span>
-                    <span class="mt-0.5 block font-mono text-xs text-muted">{step.detail}</span>
+                    <span class="block font-mono text-xs text-muted">{step.detail}</span>
                   </li>
                   {i < plane.steps.length - 1 && (
                     <li
                       aria-hidden="true"
-                      class="flex shrink-0 items-center justify-center font-mono text-xs text-muted"
+                      class="flex shrink-0 items-center justify-center px-0.5 font-mono text-xs text-muted"
                     >
                       <span class="sm:hidden">↓</span>
                       <span class="hidden sm:inline">→</span>
@@ -62,7 +62,7 @@ const [fearLine, palLine] = site.med.framing
           </div>
         ))
       }
-      <p class="font-mono text-xs text-muted">{bridge}</p>
+      <p class="border-t border-line pt-4 font-mono text-xs text-muted">{bridge}</p>
     </div>
 
     <p class="reveal mt-12 font-mono text-sm text-muted" data-reveal="fade">

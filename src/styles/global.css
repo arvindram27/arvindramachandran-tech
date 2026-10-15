@@ -17,8 +17,8 @@
   --color-ink: #141412;
   --color-muted: #6b6b66;
   --color-line: #e6e4dc;
-  --color-accent: #b45309;
-  --color-accent-strong: #92400e;
+  --color-accent: #9a4a08;
+  --color-accent-strong: #7c3a06;
 }
 
 /*
@@ -112,6 +112,7 @@
   body {
     @apply bg-paper font-sans text-ink antialiased;
     text-rendering: optimizeLegibility;
+    font-optical-sizing: auto;
   }
 
   /* Controls respond instantly on touch (no 300ms double-tap wait) and never

@@ -66,6 +66,7 @@ export type SiteContent = {
   hero: {
     positioning: string;
     stack: string[];
+    now: string;
     ctas: { primary: NavItem };
     socials: { name: string; href: string; icon: "github" | "linkedin" }[];
   };
@@ -135,6 +136,7 @@ export const site: SiteContent = {
     positioning:
       "Data Engineer building production-grade financial intelligence systems. Self-taught, project-proven.",
     stack: ["Python", "SQL", "Databricks", "Airflow", "AWS", "LangGraph"],
+    now: "Now: MED v2 (Dual-Agent Live System) shipping · v2.5 Signal Layer next",
     ctas: {
       primary: { label: "View MED", href: "#work" },
     },

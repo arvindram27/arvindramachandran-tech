@@ -7,8 +7,8 @@ import { site } from "../data/site";
     <div>
       <h2 id="about-heading" class="font-mono text-sm font-medium text-muted">About</h2>
     </div>
-    <div class="max-w-2xl text-lg leading-relaxed text-ink">
-      {site.about.map((paragraph, i) => <p class={i > 0 ? "mt-6" : ""}>{paragraph}</p>)}
+    <div class="max-w-2xl space-y-4 text-lg leading-relaxed text-ink">
+      {site.about.map((paragraph) => <p>{paragraph}</p>)}
     </div>
   </div>
 </section>
