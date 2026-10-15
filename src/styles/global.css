@@ -64,13 +64,98 @@
   transform: translateY(0);
 }
 
+/*
+  C1 — MED dual-plane step stagger (50ms cascade, piggybacks on parent .reveal).
+*/
+.plane-step {
+  transition:
+    opacity 260ms var(--motion-ease-out),
+    transform 260ms var(--motion-ease-out);
+}
+
+.reveal-hidden .plane-step {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.reveal-visible .plane-step {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*
+  C2 & C3 — Compositor-driven link underline draw, card border hover, icon lift, and tactile button press.
+*/
+.link-draw {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-draw::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1.5px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 200ms var(--motion-ease-out);
+}
+
+.icon-lift {
+  transition:
+    transform 160ms var(--motion-ease-out),
+    color 160ms ease;
+}
+
+.btn-press {
+  transition:
+    transform 140ms var(--motion-ease-out),
+    background-color 140ms ease,
+    color 140ms ease;
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link-draw:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .card-interactive {
+    transition: border-color 180ms ease;
+  }
+
+  .card-interactive:hover {
+    border-color: color-mix(in srgb, var(--color-ink) 28%, transparent);
+  }
+
+  .icon-lift:hover {
+    transform: translateY(-2px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .plane-step,
+  .link-draw::after,
+  .icon-lift,
+  .btn-press {
     transition: none;
   }
 
-  .reveal-hidden {
+  .reveal-hidden,
+  .reveal-hidden .plane-step {
     opacity: 1;
+    transform: none;
+  }
+
+  .btn-press:active {
     transform: none;
   }
 }

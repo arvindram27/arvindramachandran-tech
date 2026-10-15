@@ -57,7 +57,7 @@ const notifyFailedMessage = `Your message was saved, but the email notification 
               {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               aria-label={link.label}
               title={link.label}
-              class="p-2 text-muted hover:text-ink"
+              class="icon-lift p-2 text-muted hover:text-ink"
             >
               <svg
                 class="h-5 w-5 sm:h-6 sm:w-6"
@@ -166,7 +166,7 @@ const notifyFailedMessage = `Your message was saved, but the email notification 
         <button
           type="submit"
           data-contact-submit
-          class="mt-6 rounded-sm bg-accent px-5 py-3 text-sm font-medium text-paper hover:bg-accent-strong active:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
+          class="btn-press mt-6 rounded-sm bg-accent px-5 py-3 text-sm font-medium text-paper hover:bg-accent-strong active:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
         >
           {contact.submitLabel}
         </button>
@@ -175,7 +175,7 @@ const notifyFailedMessage = `Your message was saved, but the email notification 
             {contact.noscriptNote}{" "}
             <a
               href={`mailto:${site.email}`}
-              class="font-medium text-accent underline-offset-4 hover:text-accent-strong hover:underline"
+              class="link-draw font-medium text-accent hover:text-accent-strong"
             >
               Email me
             </a>

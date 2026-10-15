@@ -36,7 +36,7 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
               >
                 <span
                   aria-hidden="true"
-                  class={`absolute rounded-full border-2 border-ink bg-paper ${
+                  class={`journey-dot absolute rounded-full border-2 border-ink bg-paper ${
                     node.weight === "emphasis"
                       ? "top-1 h-4 w-4 -left-[2px]"
                       : "top-1.5 h-3 w-3 left-0"
@@ -51,13 +51,13 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
                 {i === 3 && artwork.length > 0 && (
                   <div class="mt-6 grid max-w-xl grid-cols-3 gap-3">
                     {artwork.map((piece) => (
-                      <figure class="border border-line">
+                      <figure class="overflow-hidden border border-line">
                         <img
                           src={piece.src}
                           alt={piece.alt}
                           loading="lazy"
                           decoding="async"
-                          class="aspect-square w-full object-cover"
+                          class="journey-art aspect-square w-full object-cover"
                         />
                       </figure>
                     ))}
@@ -89,7 +89,7 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
         <div class="journey-node mt-14">
           <a
             href={cta.href}
-            class="inline-block rounded-sm bg-accent px-5 py-3 text-sm font-medium text-paper hover:bg-accent-strong"
+            class="btn-press inline-block rounded-sm bg-accent px-5 py-3 text-sm font-medium text-paper hover:bg-accent-strong active:bg-accent-strong"
           >
             {cta.label}
           </a>
@@ -119,9 +119,28 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
     transition: transform 300ms var(--motion-ease-out);
   }
 
+  .journey-dot {
+    transition: transform 240ms var(--motion-ease-out);
+  }
+
+  .journey-art {
+    transition:
+      filter 280ms var(--motion-ease-out),
+      transform 280ms var(--motion-ease-out);
+  }
+
   .journey-hidden {
     opacity: 0;
     transform: translateY(20px);
+  }
+
+  .journey-hidden .journey-dot {
+    transform: scale(0.75);
+  }
+
+  .journey-hidden .journey-art {
+    filter: blur(2px);
+    transform: scale(0.98);
   }
 
   .journey-visible {
@@ -129,14 +148,31 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
     transform: translateY(0);
   }
 
+  .journey-visible .journey-dot {
+    transform: scale(1);
+  }
+
+  .journey-visible .journey-art {
+    filter: blur(0);
+    transform: scale(1);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .journey-node,
-    .journey-fill {
+    .journey-fill,
+    .journey-dot,
+    .journey-art {
       transition: none;
     }
 
     .journey-hidden {
       opacity: 1;
+      transform: none;
+    }
+
+    .journey-hidden .journey-dot,
+    .journey-hidden .journey-art {
+      filter: none;
       transform: none;
     }
 
