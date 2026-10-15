@@ -105,6 +105,10 @@ export type SiteContent = {
   };
   certifications: Certification[];
   contact: ContactConfig;
+  footer: {
+    builtWith: string;
+    deployedOn: string;
+  };
 };
 
 // Canonical external links — single source; hero socials and the future footer render from these.
@@ -329,5 +333,10 @@ export const site: SiteContent = {
     messageMaxLength: 2000,
     honeypotField: "company",
     whatsappHref: "https://wa.me/917358742925",
+  },
+
+  footer: {
+    builtWith: "Astro",
+    deployedOn: "Cloudflare Workers",
   },
 };

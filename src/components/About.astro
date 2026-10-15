@@ -5,7 +5,9 @@ import { site } from "../data/site";
 <section aria-labelledby="about-heading" id="about" class="border-t border-line scroll-mt-28 sm:scroll-mt-20">
   <div class="reveal mx-auto grid max-w-5xl gap-8 px-4 py-16 sm:px-6 sm:py-24 md:grid-cols-[180px_1fr] md:gap-16" data-reveal="fade">
     <div>
-      <h2 id="about-heading" class="font-mono text-sm font-medium text-muted">About</h2>
+      <h2 id="about-heading" class="font-mono text-sm font-medium tabular-nums text-muted">
+        <span class="text-muted/60">01</span> · About
+      </h2>
     </div>
     <div class="max-w-2xl space-y-4 text-lg leading-relaxed text-ink">
       {site.about.map((paragraph) => <p>{paragraph}</p>)}

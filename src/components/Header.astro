@@ -51,7 +51,7 @@ import { site } from "../data/site";
           site.nav.map((item) => (
             <a
               href={item.href}
-              class="text-sm text-muted underline-offset-4 hover:text-ink hover:underline hover:decoration-accent hover:decoration-2"
+              class="text-sm text-muted underline-offset-4 hover:text-ink hover:underline hover:decoration-accent hover:decoration-2 data-[active]:text-ink data-[active]:underline data-[active]:decoration-accent data-[active]:decoration-2"
             >
               {item.label}
             </a>
@@ -75,7 +75,7 @@ import { site } from "../data/site";
         site.nav.map((item) => (
           <a
             href={item.href}
-            class="shrink-0 rounded-full border border-line px-3.5 py-1.5 text-sm text-muted transition-colors hover:border-ink/20 hover:text-ink"
+            class="shrink-0 rounded-full border border-line px-3.5 py-1.5 text-sm text-muted transition-colors hover:border-ink/20 hover:text-ink data-[active]:border-ink/40 data-[active]:text-ink"
           >
             {item.label}
           </a>
@@ -168,5 +168,27 @@ import { site } from "../data/site";
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     updateTuck();
+  }
+
+  const sections = document.querySelectorAll("main section");
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>(
+    'header nav a[href^="#"], [data-pill-nav] a[href^="#"]',
+  );
+
+  if (sections.length > 0 && navLinks.length > 0) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.id ? `#${entry.target.id}` : "";
+            for (const link of navLinks) {
+              link.toggleAttribute("data-active", id !== "" && link.getAttribute("href") === id);
+            }
+          }
+        }
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: 0 },
+    );
+    for (const section of sections) spy.observe(section);
   }
 </script>
