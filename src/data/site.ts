@@ -21,6 +21,17 @@ export type Artwork = {
   alt: string;
 };
 
+export type ArchitectureStep = {
+  label: string;
+  detail: string;
+};
+
+export type ArchitecturePlane = {
+  label: string;
+  note: string;
+  steps: ArchitectureStep[];
+};
+
 export type Certification = {
   name: string;
   issuer: string;
@@ -65,7 +76,11 @@ export type SiteContent = {
     status: string;
     framing: string;
     description: string[];
-    architecture: { label: string; detail: string }[];
+    architecture: {
+      live: ArchitecturePlane;
+      research: ArchitecturePlane;
+      bridge: string;
+    };
     stack: string[];
     repoUrl: string;
     articleUrl: string | null;
@@ -145,12 +160,28 @@ export const site: SiteContent = {
       "The system runs on a dual-plane architecture: a Kafka/Redpanda live path detects events and emits position signals within a 5-second latency budget, while an Airflow-orchestrated research plane runs nightly recomputation, walk-forward backtesting on Databricks, and weekly model retraining. LangGraph agents (Statistician + Contextualist) analyze price anomalies and news sentiment in parallel before a Decision Maker agent generates the signal.",
       "The project is deliberately validation-first: every backtest result is reported gross and net of a full transaction-cost model, tested walk-forward with purging and embargo to avoid lookahead bias, and benchmarked against a random-entry control. A negative result — the edge existing but being fully consumed by costs — is treated as a legitimate, publishable finding, not a failure.",
     ],
-    architecture: [
-      { label: "LangGraph", detail: "agent orchestration" },
-      { label: "Kafka", detail: "streaming ingestion" },
-      { label: "Databricks Lakehouse", detail: "Delta Lake" },
-      { label: "Mosaic AI / RAG", detail: "intelligence layer" },
-    ],
+    architecture: {
+      live: {
+        label: "Live plane",
+        note: "≤ 5s latency budget",
+        steps: [
+          { label: "Kafka / Redpanda", detail: "event ingestion" },
+          { label: "LangGraph agents", detail: "Statistician + Contextualist" },
+          { label: "Decision Maker", detail: "signal" },
+          { label: "Paper-trading blotter", detail: "simulated" },
+        ],
+      },
+      research: {
+        label: "Research plane",
+        note: "nightly · reconciled daily",
+        steps: [
+          { label: "Airflow", detail: "nightly orchestration" },
+          { label: "Databricks", detail: "backtest · retrain" },
+          { label: "Snowflake", detail: "results" },
+        ],
+      },
+      bridge: "The research plane reconciles daily against the live plane.",
+    },
     stack: [
       "Python",
       "SQL",
