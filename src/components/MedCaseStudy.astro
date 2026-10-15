@@ -11,7 +11,7 @@ const svgW = stages.length * boxW + (stages.length - 1) * gap;
 const svgH = 88;
 const centerY = boxY + boxH / 2;
 
-const [fearLine, fragilityLine] = site.med.framing
+const [fearLine, palLine] = site.med.framing
   .split(". ")
   .map((sentence, i, all) => (i < all.length - 1 ? `${sentence}.` : sentence));
 
@@ -31,11 +31,11 @@ const stageAria = stages.map((s) => s.label).join(" → ");
         </h2>
         <p class="mt-8 font-display text-2xl font-medium leading-snug sm:text-3xl">
           <span class="text-ink">{fearLine}</span>
-          <span class="text-accent"> {fragilityLine}</span>
+          <span class="text-accent"> {palLine}</span>
         </p>
-        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-          {site.med.description}
-        </p>
+        <div class="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-muted">
+          {site.med.description.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
       </div>
     </div>
 

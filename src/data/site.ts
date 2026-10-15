@@ -64,7 +64,7 @@ export type SiteContent = {
     shortName: string;
     status: string;
     framing: string;
-    description: string;
+    description: string[];
     architecture: { label: string; detail: string }[];
     stack: string[];
     repoUrl: string;
@@ -119,7 +119,7 @@ export const site: SiteContent = {
   hero: {
     positioning:
       "Data Engineer building production-grade financial intelligence systems — self-taught, project-proven.",
-    stack: ["Python", "SQL", "Databricks", "AWS", "LangGraph"],
+    stack: ["Python", "SQL", "Databricks", "Airflow", "AWS", "LangGraph"],
     ctas: {
       primary: { label: "View MED", href: "#work" },
     },
@@ -137,10 +137,14 @@ export const site: SiteContent = {
   med: {
     name: "MED — Market Efficiency Detector",
     shortName: "MED",
-    status: "In progress — building in public",
-    framing: "VIX measures fear. PAL measures fragility.",
-    description:
-      "A multi-agent financial intelligence system that detects market pricing anomalies via PAL (Price Anomaly Locator), a proprietary metric for market fragility.",
+    status:
+      "In development — v2 (Dual-Agent Live System) shipping, v2.5 Signal Layer next · Last major revision: PRD v3.0, September 2026",
+    framing: "VIX measures fear. PAL measures how long the market takes to react.",
+    description: [
+      "MED (Market Efficiency Detector) measures Price Adjustment Latency (PAL) — the delay between when material information hits the market and when price fully reflects it — and tests whether that latency window is tradeable after costs.",
+      "The system runs on a dual-plane architecture: a Kafka/Redpanda live path detects events and emits position signals within a 5-second latency budget, while an Airflow-orchestrated research plane runs nightly recomputation, walk-forward backtesting on Databricks, and weekly model retraining. LangGraph agents (Statistician + Contextualist) analyze price anomalies and news sentiment in parallel before a Decision Maker agent generates the signal.",
+      "The project is deliberately validation-first: every backtest result is reported gross and net of a full transaction-cost model, tested walk-forward with purging and embargo to avoid lookahead bias, and benchmarked against a random-entry control. A negative result — the edge existing but being fully consumed by costs — is treated as a legitimate, publishable finding, not a failure.",
+    ],
     architecture: [
       { label: "LangGraph", detail: "agent orchestration" },
       { label: "Kafka", detail: "streaming ingestion" },
@@ -148,17 +152,21 @@ export const site: SiteContent = {
       { label: "Mosaic AI / RAG", detail: "intelligence layer" },
     ],
     stack: [
+      "Python",
+      "SQL",
       "LangGraph",
-      "Kafka",
+      "Apache Airflow",
       "Databricks",
-      "Delta Lake",
+      "Apache Kafka (Redpanda)",
       "Snowflake",
+      "dbt",
+      "AWS",
       "FastAPI",
       "Streamlit",
-      "Prometheus",
+      "Prometheus/Grafana",
+      "MLflow",
     ],
-    // TODO(AR): point to the actual MED repository URL once public; resolves to the GitHub profile until then.
-    repoUrl: "https://github.com/arvindram27",
+    repoUrl: "https://github.com/arvindram27/market-efficiency-detector",
     // TODO(AR): slot for the Medium deep-dive article (the center of gravity of the positioning strategy). Link stays hidden until published.
     articleUrl: null,
   },
@@ -235,7 +243,7 @@ export const site: SiteContent = {
       {
         era: "Now",
         title: "MED — Market Efficiency Detector",
-        body: "Two threads converge: capital markets from the exam years, agents from the curiosity years. MED detects market fragility — built in public, one module at a time.",
+        body: "Two threads converge: capital markets from the exam years, agents from the curiosity years. MED measures how long the market takes to react — built in public, one module at a time.",
         weight: "normal",
       },
     ],
