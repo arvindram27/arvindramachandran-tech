@@ -125,7 +125,7 @@ import { site } from "../data/site";
     };
     scroller.addEventListener("scroll", updateFades, { passive: true });
     window.addEventListener("resize", updateFades);
-    updateFades();
+    requestAnimationFrame(updateFades);
   }
 
   const pillNav = document.querySelector<HTMLElement>("[data-pill-nav]");

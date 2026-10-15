@@ -14,7 +14,7 @@ const [fearLine, palLine] = site.med.framing
     <div class="reveal grid gap-8 md:grid-cols-[180px_1fr] md:gap-16" data-reveal>
       <div>
         <p class="font-mono text-sm font-medium tabular-nums text-muted">
-          <span class="text-muted/60">02</span> · Work
+          02 · Work
         </p>
       </div>
       <div>
@@ -77,6 +77,7 @@ const [fearLine, palLine] = site.med.framing
     <div class="reveal mt-6 flex flex-wrap items-center gap-6" data-reveal="fade">
       <a
         href={site.med.repoUrl}
+        aria-label={`GitHub repository for ${site.med.shortName}`}
         class="link-draw text-sm font-medium text-accent hover:text-accent-strong"
       >
         GitHub repo
