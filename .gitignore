@@ -22,6 +22,9 @@ pnpm-debug.log*
 # wrangler local dev state
 .wrangler/
 
+# taste-skill working files (inspector screenshots, reports)
+.taste-skill/
+
 # OS-specific
 .DS_Store
 
