@@ -121,7 +121,7 @@ export const site: SiteContent = {
   name: "Arvind Ramachandran",
   domain: "arvindramachandran.tech",
   email: "arvind@arvindramachandran.tech",
-  location: "Chennai, Tamil Nadu · open to Startup & GCC roles",
+  location: "Chennai · open to Data, Analytics & Applied AI roles",
 
   // Phone number deliberately excluded from the public site (decision logged in build-log Session 0; lives on the resume PDF only).
   links: { ...links },
@@ -138,9 +138,9 @@ export const site: SiteContent = {
 
   hero: {
     positioning:
-      "Data Engineer building production-grade financial intelligence systems. Self-taught, project-proven.",
+      "Data engineer. I build systems that measure how fast markets react to news.",
     stack: ["Python", "SQL", "Databricks", "Airflow", "AWS", "LangGraph"],
-    now: "Now: MED v2 (Dual-Agent Live System) shipping · v2.5 Signal Layer next",
+    now: "Shipping MED v2 · the signal layer is next",
     ctas: {
       primary: { label: "View MED", href: "#work" },
     },
@@ -151,20 +151,20 @@ export const site: SiteContent = {
   },
 
   about: [
-    "Self-taught Data Engineer transitioning from a Mechanical Engineering background (B.Tech, Saveetha Engineering College, 2017) through focused self-study and hands-on project work. Working primarily in Python, SQL, Databricks, and AWS, with growing depth in applied GenAI and agentic systems.",
-    "Currently building MED, a multi-agent financial intelligence system, as a proof-of-skill anchor. Based in Chennai, targeting Data/Analytics/Applied AI Engineering roles, FinTech & AI sector primarily, Startup & GCC roles in Chennai/Hyderabad/Bengaluru as a near-term step.",
+    "Self-taught data engineer, formerly mechanical. I work in Python, SQL, Databricks and AWS, and I keep going deeper on applied AI: agents, RAG and vector search.",
+    "I build in public. My main project is MED, a system that measures how long markets take to respond to news. Based in Chennai, targeting Data, Analytics or Applied AI roles, FinTech and AI first, startups and GCCs in Chennai, Hyderabad or Bengaluru.",
   ],
 
   med: {
     name: "MED: Market Efficiency Detector",
     shortName: "MED",
     status:
-      "In development: v2 (Dual-Agent Live System) shipping, v2.5 Signal Layer next · Last major revision: PRD v3.0, September 2026",
+      "In flight: v2 (live dual-agent system) ships now · v2.5 signal layer next",
     framing: "VIX measures fear. PAL measures how long the market takes to react.",
     description: [
-      "MED (Market Efficiency Detector) measures Price Adjustment Latency (PAL): the delay between when material information hits the market and when price fully reflects it. It then tests whether that latency window is tradeable after costs.",
-      "The system runs on a dual-plane architecture: a Kafka/Redpanda live path detects events and emits position signals within a 5-second latency budget, while an Airflow-orchestrated research plane runs nightly recomputation, walk-forward backtesting on Databricks, and weekly model retraining. LangGraph agents (Statistician + Contextualist) analyze price anomalies and news sentiment in parallel before a Decision Maker agent generates the signal.",
-      "The project is deliberately validation-first: every backtest result is reported gross and net of a full transaction-cost model, tested walk-forward with purging and embargo to avoid lookahead bias, and benchmarked against a random-entry control. A negative result, where the edge exists but is fully consumed by costs, is treated as a legitimate, publishable finding, not a failure.",
+      "MED measures Price Adjustment Latency (PAL): the gap between news hitting the market and price fully reflecting it. Then it asks whether that window is tradeable after costs.",
+      "Two planes. A live Kafka path detects events and emits signals inside a five second latency budget. A nightly Airflow path recomputes, backtests on Databricks and reconciles the two against each other.",
+      "Every result is reported gross and net of a full transaction cost model, tested walk forward with purging and embargo, and benchmarked against random entry. An edge that costs fully erase is a finding, not a failure.",
     ],
     architecture: {
       live: {
@@ -212,7 +212,7 @@ export const site: SiteContent = {
     {
       name: "Multi-Agent Market Intelligence System",
       description:
-        "Distributed multi-agent system automating market research, data ingestion, and trend analysis; fault-tolerant ingestion pipelines.",
+        "Automates market research and data ingestion: cleaning, trend analysis, and pipelines that keep running when a step fails.",
       repoUrl: "https://github.com/arvindram27/multi-agent-market-intelligence",
     },
   ],
@@ -244,7 +244,7 @@ export const site: SiteContent = {
 
   journey: {
     intro: [
-      "From a mechanical engineering degree and years of competitive-exam preparation to building a multi-agent market intelligence system. A nine-year arc of self-directed pivots. The short version: capital-markets curiosity, one pivotal book, generative-art experiments, and a deepening focus on AI agents, all converging in MED.",
+      "From a mechanical engineering degree and eight years of exam prep to building market software. The short version: a capital markets curiosity that never left, then AI agents, ending at MED.",
     ],
     nodes: [
       {
@@ -324,9 +324,9 @@ export const site: SiteContent = {
     submitLabel: "Send message",
     sendingLabel: "Sending…",
     successMessage:
-      "Thanks for reaching out to me! I've received your message and I would personally get back!",
+      "Thanks for reaching out. I've got your message, and you'll hear back from me directly.",
     errorMessage:
-      "Something went wrong sending your message. Please try again, or reach me through one of the links above.",
+      "The message didn't send. Try again, or use one of the links above.",
     noscriptNote: "This form needs JavaScript to send. Please email me directly instead.",
     nameMaxLength: 120,
     emailMaxLength: 254,
