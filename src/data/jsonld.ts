@@ -46,10 +46,12 @@ const person = {
     addressRegion: "Tamil Nadu",
     addressCountry: "IN",
   },
-  // Rendered in the Journey timeline ("B.Tech, Mechanical Engineering from Saveetha Engineering College").
+  // Drawn from site.education (a real data field) rather than a hardcoded string, so the
+  // structured data cannot drift from the source. It is visible in the Journey timeline
+  // ("B.Tech, Mechanical Engineering from Saveetha Engineering College").
   alumniOf: {
     "@type": "EducationalOrganization",
-    name: "Saveetha Engineering College",
+    name: site.education.school,
   },
   sameAs: [site.links.github, site.links.linkedin],
   // TODO(owner): add "image" once a headshot exists. No image tag is emitted until then,

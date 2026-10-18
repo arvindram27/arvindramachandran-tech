@@ -2,6 +2,11 @@
 // Components render from this module — no copy is hardcoded in layouts/components.
 // Facts must match the resume/PRD exactly. Never invent metrics, testimonials, or companies.
 
+import type { ImageMetadata } from "astro";
+import journeyArt1 from "../assets/journey/journey-art-1.jpg";
+import journeyArt2 from "../assets/journey/journey-art-2.jpg";
+import journeyArt3 from "../assets/journey/journey-art-3.jpg";
+
 export type NavItem = { label: string; href: string };
 
 export type SkillGroup = {
@@ -17,7 +22,9 @@ export type JourneyNode = {
 };
 
 export type Artwork = {
-  src: string;
+  // Imported asset metadata (via `astro:assets`), not a public/ path, so Astro can
+  // optimize, resize and emit width/height for the rendered <img>.
+  src: ImageMetadata;
   alt: string;
 };
 
@@ -61,7 +68,7 @@ export type SiteContent = {
   email: string;
   location: string;
   links: { github: string; linkedin: string };
-  resumePath: string;
+  resumePath: string | null;
   nav: NavItem[];
   hero: {
     role: string;
@@ -129,8 +136,11 @@ export const site: SiteContent = {
   // Phone number deliberately excluded from the public site (decision logged in build-log Session 0; lives on the resume PDF only).
   links: { ...links },
 
-  // TODO(AR): replace the placeholder at public/resume.pdf with the real current resume (Module 8).
-  resumePath: "/resume.pdf",
+  // TODO(owner): drop the real current resume at public/resume.pdf, then set this back to
+  // "/resume.pdf" and the header button returns. Left null so the site never links to a file that
+  // does not exist: linkinator flagged /resume.pdf as a 404, and a broken primary CTA is worse than
+  // no CTA. The header renders the Resume button only when this is a non-null string.
+  resumePath: null,
 
   nav: [
     { label: "Work", href: "#work" },
@@ -314,15 +324,15 @@ export const site: SiteContent = {
     ],
     artwork: [
       {
-        src: "/journey/journey-art-1.jpg",
+        src: journeyArt1,
         alt: "Midjourney artwork: a monumental white figure with a red head between two red panels, presiding over a gathered crowd",
       },
       {
-        src: "/journey/journey-art-2.jpg",
+        src: journeyArt2,
         alt: "Midjourney artwork: a black dragon-like phoenix entwined with orange flame, ink illustration style",
       },
       {
-        src: "/journey/journey-art-3.jpg",
+        src: journeyArt3,
         alt: "Midjourney artwork: a village with church spires rising through morning mist",
       },
     ],

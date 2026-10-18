@@ -5,9 +5,10 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "prebuild": "node scripts/clean-dist.mjs",
     "build": "astro build && node scripts/check-jsonld.mjs",
     "check:jsonld": "node scripts/check-jsonld.mjs",
+    "check:links": "node scripts/check-links.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "favicons": "node scripts/build-favicons.mjs",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "linkinator": "^8.1.0",
     "png-to-ico": "^3.0.2",
     "sharp": "^0.35.4",
     "typescript": "^6.0.3",

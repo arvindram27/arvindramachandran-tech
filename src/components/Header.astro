@@ -21,12 +21,14 @@ import { site } from "../data/site";
         </svg>
         <span>{site.name}</span>
       </a>
-      <a
-        href={site.resumePath}
-        class="btn-press shrink-0 rounded-sm border border-accent px-3 py-2 text-sm font-medium text-accent hover:bg-accent hover:text-paper active:bg-accent active:text-paper"
-      >
-        Resume
-      </a>
+      { site.resumePath && (
+        <a
+          href={site.resumePath}
+          class="btn-press shrink-0 rounded-sm border border-accent px-3 py-2 text-sm font-medium text-accent hover:bg-accent hover:text-paper active:bg-accent active:text-paper"
+        >
+          Resume
+        </a>
+      ) }
     </div>
 
     <div class="hidden h-16 items-center justify-between gap-3 sm:flex">
@@ -57,12 +59,14 @@ import { site } from "../data/site";
             </a>
           ))
         }
-        <a
-          href={site.resumePath}
-          class="btn-press rounded-sm border border-accent px-3 py-2 text-sm font-medium text-accent hover:bg-accent hover:text-paper active:bg-accent active:text-paper"
-        >
-          Resume
-        </a>
+        { site.resumePath && (
+          <a
+            href={site.resumePath}
+            class="btn-press rounded-sm border border-accent px-3 py-2 text-sm font-medium text-accent hover:bg-accent hover:text-paper active:bg-accent active:text-paper"
+          >
+            Resume
+          </a>
+        ) }
       </nav>
     </div>
   </div>

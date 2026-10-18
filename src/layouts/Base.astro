@@ -81,7 +81,7 @@ const jsonLdBlocks = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
     {/* TODO(owner): add twitter:site / twitter:creator once a public X handle exists. */}
     {
       jsonLdBlocks.map((block) => (
-        <script type="application/ld+json" set:html={JSON.stringify(block)} />
+        <script type="application/ld+json" is:inline set:html={JSON.stringify(block)} />
       ))
     }
   </head>

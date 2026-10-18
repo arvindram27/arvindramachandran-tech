@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { site } from "../data/site";
 
 const { intro, nodes, artwork, cta } = site.journey;
@@ -52,9 +53,12 @@ const bodyClass = "mt-2 text-base leading-relaxed text-muted";
                   <div class="mt-6 grid max-w-xl grid-cols-3 gap-3">
                     {artwork.map((piece) => (
                       <figure class="overflow-hidden border border-line">
-                        <img
+                        <Image
                           src={piece.src}
                           alt={piece.alt}
+                          widths={[184, 368]}
+                          sizes="(min-width: 640px) 184px, 30vw"
+                          format="webp"
                           loading="lazy"
                           decoding="async"
                           class="journey-art aspect-square w-full object-cover"
