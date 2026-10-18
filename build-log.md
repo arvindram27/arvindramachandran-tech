@@ -415,3 +415,18 @@ Read this file at the start of every session before touching code.
 - Files touched: src/components/Hero.astro, Journey.astro, MedCaseStudy.astro, SecondaryProjects.astro, src/pages/404.astro, build-log.md (appended)
 - Known issues: `grey-body` is a heuristic (it samples the first run of the dominant font-and-size), so this clears the dominant running text rather than every muted string; muted labels remain at 5.1:1 by design, which the skill permits for secondary notes. One Lighthouse run immediately after a deploy briefly reported `robots-txt is not valid` (SEO 0.83); `robots.txt` is byte-clean (LF only, no BOM, correct content type) and the next two runs returned 100/100/100 with no failures, so that was a transient fetch during the deploy, not a regression.
 - Next module: none. Items 2, 3 and 5 stay declined, and the identity-versus-house-style decision is unchanged.
+
+## Mobile hero above-the-fold pass - 2026-10-19
+- Goal: on phones only, lift the View MED button and the GitHub and LinkedIn icons fully above the fold, and close the gap between the nav pills and the eyebrow. Laptop and tablet were already correct and had to stay byte-identical.
+- Every change is a mobile base value with the previous value restored at `sm` (640px), so at 640px and above nothing moves. `sm` is the exact mobile boundary here: the centered logo row and the pill nav are both `sm:hidden`.
+  - Hero section padding: `pt-[0.875rem] pb-12 sm:pt-[clamp(1.5rem,5vh,3.5rem)] sm:pb-24` (was `pt-[clamp(1.5rem,5vh,3.5rem)] pb-24`). Nav pills to eyebrow 33.6px to 14px; bottom padding 96px to 48px.
+  - Hero grid gap: `gap-4 sm:gap-8` (was `gap-8`).
+  - Intro paragraph: `mt-4 text-[clamp(1.2rem,5vw,1.4rem)] sm:mt-6 sm:text-2xl` (was `mt-6 text-xl sm:text-2xl`).
+  - Stack line: `mt-4 sm:mt-6` (was `mt-6`). Status line: `mt-2 sm:mt-3` (was `mt-3`). CTA row: `mt-6 sm:mt-10` (was `mt-10`).
+- Nav stickiness was not touched: the pill nav keeps its existing `sticky top-16` and its tuck-away-on-scroll behaviour.
+- Verified: `astro check` 0 errors / 0 warnings / 0 hints; build clean; `check-jsonld: ok - 3 blocks across 2 pages, 3 distinct @id values`; live Lighthouse accessibility 100 / best-practices 100 / SEO 100 with `failures: []`; live CLS **0.000** with zero layout-shift entries and no horizontal overflow; the taste-skill gate is unchanged at 9 FAIL / 4 WARN, so nothing new was introduced.
+- Rendered and checked at the requested widths with Cloudflare browser rendering: 360x800 (View MED and both icons end about 650px), 390x844 (about 665px) and 412x915 (about 645px), each fully above its fold. Tablet 768x1024 and laptop 1440x900 were re-rendered and are identical to before the change.
+- Observed, deliberately not fixed: on a phone the PAL chart is decorative and `aria-hidden`, and it animates once it enters the viewport (measured against the top 75%). Now that the hero is shorter, the chart's caption can sit inside the first screen before the line has drawn, leaving a short blank area above the caption until the page is scrolled. That is the existing reveal behaviour, not something changed here; it can be adjusted on request.
+- Files touched: src/components/Hero.astro, build-log.md (appended)
+- Known issues: the first Lighthouse run immediately after a deploy can still report the transient `robots-txt is not valid` (SEO 0.83) that clears on the next run; `robots.txt` is byte-clean, so it is deploy propagation.
+- Next module: none.
