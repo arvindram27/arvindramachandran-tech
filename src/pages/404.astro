@@ -1,0 +1,60 @@
+---
+// Branded 404. Standalone (no site header/footer) because the header nav is built from
+// in-page fragment links (#work, #projects, ...), which cannot resolve from an unknown URL.
+// Worker assets serve this file with a real 404 status (see wrangler.jsonc not_found_handling)
+// and it is marked noindex, so it can never be indexed however it is reached.
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+
+// Reuse the site nav, made root-absolute so the fragments resolve on the homepage.
+const jumpLinks = site.nav.map((item) => ({ label: item.label, href: `/${item.href}` }));
+---
+
+<Base
+  bare
+  noindex
+  title={`Page not found · ${site.name}`}
+  description={`That page does not exist. Head back to the homepage for ${site.name}, a ${site.hero.role.toLowerCase()}, and the MED project.`}
+>
+  <section class="mx-auto flex min-h-[80vh] max-w-5xl flex-col justify-center px-4 py-16 sm:px-6 sm:py-24">
+    <svg aria-hidden="true" class="h-10 w-10" viewBox="0 0 64 64" fill="none">
+      <polyline
+        points="6,44 16,38 24,42 32,30 40,36 48,20 58,26"
+        stroke="currentColor"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></polyline>
+      <circle cx="48" cy="20" r="7" fill="#B45309"></circle>
+    </svg>
+
+    <p class="mt-8 font-mono text-xs tracking-wide text-muted">ERROR 404</p>
+
+    <h1 class="mt-4 font-display text-4xl leading-[1.05] font-semibold tracking-[-0.025em] text-ink sm:text-5xl">
+      This page is not here
+    </h1>
+
+    <p class="mt-6 max-w-xl text-base text-muted sm:text-lg">
+      The link may be old, or the address may have a typo. Everything about my work lives on
+      the homepage: the MED case study, the projects, and how to get in touch.
+    </p>
+
+    <nav aria-label="Site sections" class="mt-12 flex flex-wrap items-center gap-4">
+      <a
+        href="/"
+        class="btn-press rounded-sm bg-accent px-4 py-3 text-sm font-medium text-paper hover:bg-accent-strong active:bg-accent-strong"
+      >
+        Back to the homepage
+      </a>
+      {
+        jumpLinks.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm text-muted underline-offset-4 hover:text-ink hover:underline hover:decoration-accent hover:decoration-2"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </section>
+</Base>

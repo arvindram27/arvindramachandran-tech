@@ -7,6 +7,9 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
+    // Serve the branded src/pages/404.astro (built to dist/404.html) with a real 404 status
+    // for any URL that does not match an asset. Documented Astro-on-Workers setup.
+    "not_found_handling": "404-page",
     "run_worker_first": ["/api/*", "/_astro/*"]
   },
   "d1_databases": [

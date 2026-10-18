@@ -12,14 +12,37 @@ import { site } from "../data/site";
 interface Props {
   title?: string;
   description?: string;
+  /** Path under /public for the social card, e.g. "/og/default.png". */
+  image?: string;
+  type?: "website" | "article" | "profile";
+  /** One object or an array of schema.org JSON-LD objects, rendered as separate scripts. */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Render the page without the site header and footer (used by the 404 route). */
+  bare?: boolean;
+  /** Ask crawlers not to index this page (used by the 404 route). */
+  noindex?: boolean;
 }
 
 const SEO_DESCRIPTION =
   "Data engineer in Chennai building MED, a multi-agent financial intelligence system measuring Price Adjustment Latency. Python, SQL, Databricks, LangGraph.";
 
-const { title, description = SEO_DESCRIPTION } = Astro.props;
+const OG_IMAGE = "/og/default.png";
+const OG_IMAGE_ALT = "Arvind Ramachandran, Data Engineer in Chennai";
+
+const {
+  title,
+  description = SEO_DESCRIPTION,
+  image = OG_IMAGE,
+  type = "website",
+  jsonLd = [],
+  bare = false,
+  noindex = false,
+} = Astro.props;
+
 const pageTitle = title ?? `${site.name} · ${site.hero.role}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site).href;
+const jsonLdBlocks = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
 ---
 
 <html lang="en">
@@ -28,6 +51,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -36,11 +60,27 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#FAFAF7" />
-    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <!-- TODO(AR): designed OG card (public/og.png) lands with S1 (SEO foundations) -->
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={OG_IMAGE_ALT} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={OG_IMAGE_ALT} />
+    {/* TODO(owner): add twitter:site / twitter:creator once a public X handle exists. */}
+    {
+      jsonLdBlocks.map((block) => (
+        <script type="application/ld+json" set:html={JSON.stringify(block)} />
+      ))
+    }
   </head>
   <body>
     <a
@@ -49,11 +89,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     >
       Skip to content
     </a>
-    <Header />
+    {!bare && <Header />}
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    {!bare && <Footer />}
     <script>
       const revealables = document.querySelectorAll("[data-reveal]");
 
