@@ -7,7 +7,7 @@ import { site } from "../data/site";
     <div class="flex h-16 items-center justify-between gap-3 sm:hidden">
       <a
         href="/"
-        class="flex shrink-0 items-center gap-2.5 font-display text-sm font-semibold tracking-tight text-ink"
+        class="flex shrink-0 items-center gap-2 font-display text-sm font-semibold tracking-tight text-ink"
         aria-label={`${site.name}, home`}
       >
         <svg aria-hidden="true" class="h-5 w-5 shrink-0" viewBox="0 0 64 64" fill="none">
@@ -23,7 +23,7 @@ import { site } from "../data/site";
       </a>
       <a
         href={site.resumePath}
-        class="btn-press shrink-0 rounded-sm border border-accent px-2.5 py-1.5 text-sm font-medium text-accent hover:bg-accent hover:text-paper active:bg-accent active:text-paper"
+        class="btn-press shrink-0 rounded-sm border border-accent px-3 py-2 text-sm font-medium text-accent hover:bg-accent hover:text-paper active:bg-accent active:text-paper"
       >
         Resume
       </a>
@@ -32,7 +32,7 @@ import { site } from "../data/site";
     <div class="hidden h-16 items-center justify-between gap-3 sm:flex">
       <a
         href="/"
-        class="flex shrink-0 items-center gap-2.5 font-display text-sm font-semibold tracking-tight text-ink"
+        class="flex shrink-0 items-center gap-2 font-display text-sm font-semibold tracking-tight text-ink"
         aria-label={`${site.name}, home`}
       >
         <svg aria-hidden="true" class="h-5 w-5 shrink-0" viewBox="0 0 64 64" fill="none">
@@ -59,7 +59,7 @@ import { site } from "../data/site";
         }
         <a
           href={site.resumePath}
-          class="btn-press rounded-sm border border-accent px-2.5 py-1.5 text-sm font-medium text-accent hover:bg-accent hover:text-paper active:bg-accent active:text-paper"
+          class="btn-press rounded-sm border border-accent px-3 py-2 text-sm font-medium text-accent hover:bg-accent hover:text-paper active:bg-accent active:text-paper"
         >
           Resume
         </a>
@@ -69,13 +69,13 @@ import { site } from "../data/site";
 </header>
 
 <div class="pill-nav sticky top-16 z-40 bg-paper sm:hidden" data-pill-nav data-tucked="false">
-  <div class="relative mx-auto max-w-5xl px-4 pb-2.5 sm:px-6" data-nav-fades>
+  <div class="relative mx-auto max-w-5xl px-4 pb-2 sm:px-6" data-nav-fades>
     <div class="no-scrollbar flex gap-2 overflow-x-auto whitespace-nowrap" data-nav-scroll>
       {
         site.nav.map((item) => (
           <a
             href={item.href}
-            class="shrink-0 rounded-full border border-line px-3.5 py-1.5 text-sm text-muted transition-colors hover:border-ink/20 hover:text-ink data-[active]:border-ink/40 data-[active]:text-ink"
+            class="shrink-0 rounded-full border border-line px-3 py-2 text-sm text-muted transition-colors hover:border-ink/20 hover:text-ink data-[active]:border-ink/40 data-[active]:text-ink"
           >
             {item.label}
           </a>
