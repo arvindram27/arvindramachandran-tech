@@ -71,8 +71,8 @@ const med = {
   "@type": "SoftwareSourceCode",
   "@id": MED_ID,
   name: "MED: Market Efficiency Detector",
-  // First MED paragraph, verbatim from the rendered copy.
-  description: site.med.description[0],
+  // Standalone PAL definition, written to survive being quoted on its own.
+  description: site.med.palDefinition,
   codeRepository: site.med.repoUrl,
   programmingLanguage: "Python",
   author: { "@id": PERSON_ID },

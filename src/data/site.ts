@@ -78,6 +78,8 @@ export type SiteContent = {
     status: string;
     framing: string;
     description: string[];
+    palDefinition: string;
+    faq: { q: string; a: string }[];
     architecture: {
       live: ArchitecturePlane;
       research: ArchitecturePlane;
@@ -164,9 +166,33 @@ export const site: SiteContent = {
       "In flight: v2 (live dual-agent system) ships now · v2.5 signal layer next",
     framing: "VIX measures fear. PAL measures how long the market takes to react.",
     description: [
-      "MED measures Price Adjustment Latency (PAL): the gap between news hitting the market and price fully reflecting it. Then it asks whether that window is tradeable after costs.",
       "Two planes. A live Kafka path detects events and emits signals inside a five second latency budget. A nightly Airflow path recomputes, backtests on Databricks and reconciles the two against each other.",
       "Every result is reported gross and net of a full transaction cost model, tested walk forward with purging and embargo, and benchmarked against random entry. An edge that costs fully erase is a finding, not a failure.",
+    ],
+    // Standalone definition, written to survive being quoted on its own (AEO).
+    palDefinition:
+      "Price Adjustment Latency (PAL) is the delay between when material information reaches the market and when the price fully reflects it. MED, the Market Efficiency Detector, measures PAL and tests whether that latency window is still tradeable after transaction costs.",
+    faq: [
+      {
+        q: "What does MED measure?",
+        a: "Price Adjustment Latency (PAL): how long the market takes to fully price in new information. MED measures that delay, then asks whether the window is still tradeable once transaction costs are paid.",
+      },
+      {
+        q: "How does MED validate its results?",
+        a: "Every result is reported gross and net of a full transaction cost model, tested walk forward with purging and embargo so the model cannot see the future, and benchmarked against random entry. An edge that costs fully erase is treated as a finding, not a failure.",
+      },
+      {
+        q: "Is MED a trading product?",
+        a: "No. MED is a research system. It runs a simulated paper-trading blotter to test its signals, and it is not a live trading product. It has no published results yet.",
+      },
+      {
+        q: "What stack does MED use?",
+        a: "Python, SQL, LangGraph, Apache Airflow, Databricks, Apache Kafka (Redpanda), Snowflake, dbt, AWS, FastAPI, Streamlit, Prometheus/Grafana and MLflow.",
+      },
+      {
+        q: "What is the status of MED?",
+        a: "v2, the live dual-agent system, ships now. v2.5, the signal layer, is next. First PAL results will publish with the v1 research write-up.",
+      },
     ],
     architecture: {
       live: {
