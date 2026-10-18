@@ -18,7 +18,7 @@ const SEO_DESCRIPTION =
   "Data engineer in Chennai building MED, a multi-agent financial intelligence system measuring Price Adjustment Latency. Python, SQL, Databricks, LangGraph.";
 
 const { title, description = SEO_DESCRIPTION } = Astro.props;
-const pageTitle = title ?? `${site.name} · Data Engineer in Chennai`;
+const pageTitle = title ?? `${site.name} · ${site.hero.role}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 

@@ -64,6 +64,7 @@ export type SiteContent = {
   resumePath: string;
   nav: NavItem[];
   hero: {
+    role: string;
     positioning: string;
     stack: string[];
     now: string;
@@ -121,7 +122,7 @@ export const site: SiteContent = {
   name: "Arvind Ramachandran",
   domain: "arvindramachandran.tech",
   email: "arvind@arvindramachandran.tech",
-  location: "Chennai · open to Data, Analytics & Applied AI roles",
+  location: "Open to Data, Analytics and Applied AI roles",
 
   // Phone number deliberately excluded from the public site (decision logged in build-log Session 0; lives on the resume PDF only).
   links: { ...links },
@@ -137,8 +138,9 @@ export const site: SiteContent = {
   ],
 
   hero: {
+    role: "Data Engineer in Chennai",
     positioning:
-      "Data engineer. I build systems that measure how fast markets react to news.",
+      "I build data pipelines and AI agents. My main project is MED, the Market Efficiency Detector. It measures how long financial markets take to react to news, then tests whether that gap can be traded after costs.",
     stack: ["Python", "SQL", "Databricks", "Airflow", "AWS", "LangGraph"],
     now: "Shipping MED v2 · the signal layer is next",
     ctas: {
