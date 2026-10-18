@@ -166,7 +166,7 @@ export const site: SiteContent = {
 
   about: [
     "Self-taught data engineer, formerly mechanical. I work in Python, SQL, Databricks and AWS, and I keep going deeper on applied AI: agents, RAG and vector search.",
-    "I build in public. My main project is MED, a system that measures how long markets take to respond to news. Based in Chennai, targeting Data, Analytics or Applied AI roles, FinTech and AI first, startups and GCCs in Chennai, Hyderabad or Bengaluru.",
+    "I build in public. My main project is MED, a system that measures how long markets take to respond to news. I'm looking for data, analytics or applied AI roles. Fintech and AI interest me most. I'm open to startups and GCCs in Chennai, Coimbatore, Kochi, Hyderabad or Bengaluru. Full-time, internship and remote roles are all fine.",
   ],
 
   med: {
