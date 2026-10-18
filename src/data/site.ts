@@ -252,7 +252,7 @@ export const site: SiteContent = {
       {
         era: "2017",
         title: "Graduation",
-        body: "Mechanical engineering degree in hand. Next: Civil Services, RBI Grade B, SEBI Grade A.",
+        body: "B.Tech, Mechanical Engineering from Saveetha Engineering College. Next: Civil Services, RBI Grade B, SEBI Grade A.",
         weight: "normal",
       },
       {

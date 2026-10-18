@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
-    "build": "astro build",
+    "build": "astro build && node scripts/check-jsonld.mjs",
+    "check:jsonld": "node scripts/check-jsonld.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "favicons": "node scripts/build-favicons.mjs",

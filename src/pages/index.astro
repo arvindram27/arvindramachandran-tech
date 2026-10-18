@@ -7,9 +7,10 @@ import SecondaryProjects from "../components/SecondaryProjects.astro";
 import Skills from "../components/Skills.astro";
 import Journey from "../components/Journey.astro";
 import Contact from "../components/Contact.astro";
+import { homeJsonLd } from "../data/jsonld";
 ---
 
-<Base>
+<Base jsonLd={homeJsonLd}>
   <Hero />
   <About />
   <MedCaseStudy />
