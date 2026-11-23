@@ -101,6 +101,10 @@ export type SiteContent = {
     description: string;
     repoUrl: string;
   }[];
+  research: {
+    label: string;
+    href: string;
+  };
   skills: SkillGroup[];
   journey: {
     intro: string[];
@@ -254,6 +258,11 @@ export const site: SiteContent = {
       repoUrl: "https://github.com/arvindram27/multi-agent-market-intelligence",
     },
   ],
+
+  research: {
+    label: "Arsenal's commercial ascent, a source-based case study",
+    href: "/research/arsenal-commercial-case-study",
+  },
 
   skills: [
     { category: "Languages", items: ["Python", "SQL"] },

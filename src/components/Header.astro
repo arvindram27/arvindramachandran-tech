@@ -1,5 +1,8 @@
 ---
 import { site } from "../data/site";
+
+const isHome = Astro.url.pathname === "/";
+const navHref = (href: string) => (!isHome && href.startsWith("#") ? `/${href}` : href);
 ---
 
 <header class="sticky top-0 z-50 border-b border-line bg-paper max-sm:border-b-0">
@@ -54,7 +57,7 @@ import { site } from "../data/site";
         {
           site.nav.map((item) => (
             <a
-              href={item.href}
+              href={navHref(item.href)}
               class="text-sm text-muted underline-offset-4 hover:text-ink hover:underline hover:decoration-accent hover:decoration-2 data-[active]:text-ink data-[active]:underline data-[active]:decoration-accent data-[active]:decoration-2"
             >
               {item.label}
@@ -81,7 +84,7 @@ import { site } from "../data/site";
         {
           site.nav.map((item) => (
             <a
-              href={item.href}
+              href={navHref(item.href)}
               class="shrink-0 rounded-full border border-line px-3 py-2 text-sm text-muted transition-colors hover:border-ink/20 hover:text-ink data-[active]:border-ink/40 data-[active]:text-ink"
             >
               {item.label}
